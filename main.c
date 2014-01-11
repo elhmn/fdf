@@ -95,7 +95,6 @@ void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 
-
 void	struct_init(t_pos *pos, t_rect *rect)
 {
 	rect->high = 50;
