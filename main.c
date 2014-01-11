@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "tools.h"
+//# define ABS(x) x *= -1
+#include <math.h>
 
 int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
 {
@@ -86,12 +88,57 @@ void	ft_draw_line_2(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 /*
-** algorithme incrementale_2 Bon pour tous les tracer et rapide
+** algorithme incrementale_2 Bon pour tous les tracer et rapide method I
+** penser a coder la methode 2 mais aussi et surtout a comprendre parfaitement
+** cette algo
 */
 
 void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
 {
-
+	t_pos	d;
+	t_pos	inc;
+	int		i;
+	float	approx;
+	
+	i = 1;
+	d.x = B.x - A.x;
+	d.y = B.y - A.y;
+	inc.x = (d.x > 0) ? 1 : -1;
+	inc.y = (d.y > 0) ? 1 : -1;
+	d.x = abs(d.x);
+	d.y = abs(d.y);
+	if (d.x >= d.y)
+	{
+		approx = d.x / 2;
+		while (i < d.x)
+		{
+			A.x += inc.x;
+			approx += d.y;
+			if (approx >= d.x)
+			{
+				approx -= d.x;
+				A.y += inc.y;
+			}
+			mlx_pixel_put(mlx, win, A.x, A.y, 0xFFFFFF);
+			i++;
+		}
+	}
+	else
+	{
+		approx = d.y / 2;
+		while (i < d.y)
+		{
+			approx += d.x;
+			A.y += inc.y;
+			if (approx >= d.y)
+			{
+				approx -= d.y;
+				A.x += inc.x;
+			}
+			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+			i++;
+		}
+	}
 }
 
 
@@ -126,8 +173,8 @@ int		main(void)
 	pos_init(&A, 0, 0);
 	pos_init(&B, 200, 400);
 	ft_draw_line(mlx, win, A, B);
-	pos_init(&A, 200, 400);
-	pos_init(&B, 0, 0);
+	pos_init(&A, 10, 400);
+	pos_init(&B, 200, 0);
 	ft_draw_line(mlx, win, A, B);
 	//draw(mlx, win, rect, rect_pos);
 	/*while (i < 400)
