@@ -18,8 +18,8 @@
 
 int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while(i < rect.high)
@@ -36,25 +36,65 @@ int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
 	return (0);
 }
 
-void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
+/*
+** algo avec fonction afine pas mal mais lent 
+*/
+
+
+void	ft_draw_line_1(void *mlx, void *win, t_pos A, t_pos B)
 {
 	float		a;
 	float		b;
 
-//	if (A.x > B.x || A.y > B.y)
-//		ft_draw_line(mlx, win, B, A);
-//	else
-//	{
-		a = (float) ( (B.y - A.y) / (B.x - A.x));
-		b = A.y - a * A.x;
-		while (A.x <= B.x)
-		{
-			A.y = (int)(a * A.x + b);
-			mlx_pixel_put(mlx, win, A.x++, A.y, 0xFFFFFF);
-			usleep(10000);
-		}
-//	}
+	a = (float) ( (B.y - A.y) / (B.x - A.x));
+	b = A.y - a * A.x;
+	while (A.x <= B.x)
+	{
+		A.y = (int)(a * A.x + b);
+		mlx_pixel_put(mlx, win, A.x++, A.y, 0xFFFFFF);
+		usleep(10000);
+	}
 }
+
+
+/*
+** algorithme incrementale_1 Bon pour des ecrans a basse resolution
+*/
+
+void	ft_draw_line_2(void *mlx, void *win, t_pos A, t_pos B)
+{
+	int		dx;
+	int		dy;
+	int		approx;
+
+	dx = B.x - A.x;
+	dy = B.y - A.y;
+	approx = dx / dy;
+	mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+	while (A.x <= B.x)
+	{
+		approx += dy;
+		if (approx >= dx)
+		{
+			approx -= dx;
+			A.y++;
+		}
+		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+		usleep(10000);
+		A.x++;
+	}
+}
+
+/*
+** algorithme incrementale_2 Bon pour tous les tracer et rapide
+*/
+
+void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
+{
+
+}
+
+
 
 void	struct_init(t_pos *pos, t_rect *rect)
 {
@@ -85,10 +125,10 @@ int		main(void)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 400, 400, "42");
 	pos_init(&A, 0, 0);
-	pos_init(&B, 100, 400);
+	pos_init(&B, 200, 400);
 	ft_draw_line(mlx, win, A, B);
-	pos_init(&A, 10, 200);
-	pos_init(&B, 100, 10);
+	pos_init(&A, 200, 400);
+	pos_init(&B, 0, 0);
 	ft_draw_line(mlx, win, A, B);
 	//draw(mlx, win, rect, rect_pos);
 	/*while (i < 400)
