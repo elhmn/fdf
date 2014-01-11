@@ -1,0 +1,9 @@
+#vim tmp
+*.*.swp
+*.*.swo
+
+#C Object
+*.o
+
+#C lib files
+*.a
