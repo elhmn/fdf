@@ -10,13 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <mlx.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "tools.h"
-//# define ABS(x) x *= -1
-#include <math.h>
 
 int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
 {
@@ -29,131 +23,13 @@ int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
 		j = 0;
 		while (j < rect.width)
 		{
-			mlx_pixel_put(mlx, win, pos.x + j, pos.y + i, 0xFFFFFF);
+			mlx_pixel_put(mlx, win, pos.x + j, pos.y + i, 0x00FF00);
 			usleep(500);
 			j++;
 		}
 		i++;
 	}
 	return (0);
-}
-
-/*
-** algo avec fonction afine pas mal mais lent 
-*/
-
-
-void	ft_draw_line_1(void *mlx, void *win, t_pos A, t_pos B)
-{
-	float		a;
-	float		b;
-
-	a = (float) ( (B.y - A.y) / (B.x - A.x));
-	b = A.y - a * A.x;
-	while (A.x <= B.x)
-	{
-		A.y = (int)(a * A.x + b);
-		mlx_pixel_put(mlx, win, A.x++, A.y, 0xFFFFFF);
-		usleep(10000);
-	}
-}
-
-
-/*
-** algorithme incrementale_1 Bon pour des ecrans a basse resolution
-*/
-
-void	ft_draw_line_2(void *mlx, void *win, t_pos A, t_pos B)
-{
-	int		dx;
-	int		dy;
-	int		approx;
-
-	dx = B.x - A.x;
-	dy = B.y - A.y;
-	approx = dx / dy;
-	mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
-	while (A.x <= B.x)
-	{
-		approx += dy;
-		if (approx >= dx)
-		{
-			approx -= dx;
-			A.y++;
-		}
-		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
-		usleep(10000);
-		A.x++;
-	}
-}
-
-/*
-** algorithme incrementale_2 Bon pour tous les tracer et rapide method I
-** penser a coder la methode 2 mais aussi et surtout a comprendre parfaitement
-** cette algo
-*/
-
-void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
-{
-	t_pos	d;
-	t_pos	inc;
-	int		i;
-	float	approx;
-	
-	i = 1;
-	d.x = B.x - A.x;
-	d.y = B.y - A.y;
-	inc.x = (d.x > 0) ? 1 : -1;
-	inc.y = (d.y > 0) ? 1 : -1;
-	d.x = abs(d.x);
-	d.y = abs(d.y);
-	if (d.x >= d.y)
-	{
-		approx = d.x / 2;
-		while (i < d.x)
-		{
-			A.x += inc.x;
-			approx += d.y;
-			if (approx >= d.x)
-			{
-				approx -= d.x;
-				A.y += inc.y;
-			}
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFFFFFF);
-			i++;
-		}
-	}
-	else
-	{
-		approx = d.y / 2;
-		while (i < d.y)
-		{
-			approx += d.x;
-			A.y += inc.y;
-			if (approx >= d.y)
-			{
-				approx -= d.y;
-				A.x += inc.x;
-			}
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
-			i++;
-		}
-	}
-}
-
-
-void	struct_init(t_pos *pos, t_rect *rect)
-{
-	rect->high = 50;
-	rect->width = 100;
-	pos->x = 200 - rect->width / 2;
-	pos->y = 200 - rect->high / 2;
-}
-
-void	pos_init(t_pos *pos, int x, int y)
-{
-	pos->x = x;
-	pos->y = y;
 }
 
 int		main(void)
@@ -166,16 +42,23 @@ int		main(void)
 	t_pos	B;
 	t_pos	rect_pos;
 
+	t_rect			prect;
+
+	prect.high = 5;
+	prect.width = 5;
+	
 	//i = 0;
 	struct_init(&rect_pos, &rect);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 400, 400, "42");
-	pos_init(&A, 0, 0);
-	pos_init(&B, 200, 400);
+	pos_init(&A, 100, 1);
+	pos_init(&B, 20, 30);
+	draw(mlx, win, prect, A);
+	draw(mlx, win, prect, B);
 	ft_draw_line(mlx, win, A, B);
-	pos_init(&A, 10, 400);
-	pos_init(&B, 200, 0);
-	ft_draw_line(mlx, win, A, B);
+//	pos_init(&A, 10, 400);
+//	pos_init(&B, 200, 0);
+//	ft_draw_line(mlx, win, A, B);
 	//draw(mlx, win, rect, rect_pos);
 	/*while (i < 400)
 		mlx_pixel_put(mlx, win, 200, 0 + i++, 0xFF0000);

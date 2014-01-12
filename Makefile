@@ -10,13 +10,13 @@
 ##                                                                            ##
 ## ########################################################################## ##
 
-SRC = main.c
+SRC = main.c tools.c ft_draw.c
 
 FLAGS = -Wall -Wextra -Werror 
 
 CC = gcc
 
-LIB = -L /usr/lib64/X11/ -lmlx -lX11 -lXext
+LIB = -L /usr/lib64/X11/ -lmlx -lX11 -lXext -lm
 
 INCLUDE = -I /usr/include/X11 
 
