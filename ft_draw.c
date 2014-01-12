@@ -57,7 +57,8 @@ void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 /*
-** algorithme incrementale_1 Bon pour des ecrans a basse resolution
+** algorithme ADN (Analyseur differentiel numerique)
+** incrementale_1 Bon pour des ecrans a basse resolution
 */
 
 void	ft_draw_line_2(void *mlx, void *win, t_pos A, t_pos B)
@@ -85,12 +86,48 @@ void	ft_draw_line_2(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 /*
+** Algo incrementale ADN (Analyseur Differentiel Numerique)
+*/
+
+static int		MAX(int	a, int b)
+{
+	int	val;
+
+	val = (a > b) ? a : b;
+	return (val);
+}
+
+void	ft_draw_line_3(void *mlx, void *win, t_pos A, t_pos B)
+{
+	double	incx;
+	double	incy;
+	int		longueur;
+	int		i;
+	double		x;
+	double		y;
+	
+	i = 0;
+	x = A.x + 0.5;
+	y = A.y + 0.5;
+	longueur = MAX(abs(B.x - A.x), abs(B.y - A.y));
+	incx = (double)(B.x - A.x) / (double)longueur;
+	incy = (double)(B.y - A.y) / (double)longueur;
+	while (i < longueur)
+	{
+		mlx_pixel_put(mlx, win, (int)x, (int)y, 0xFF0000);
+		x += incx;
+		y += incy;
+		i++;
+	}
+}
+
+/*
 ** algorithme incrementale_2 Bon pour tous les tracer et rapide method I
 ** penser a coder la methode 2 mais aussi et surtout a comprendre parfaitement
 ** cet algo
 */
 
-void	ft_draw_line_3(void *mlx, void *win, t_pos A, t_pos B)
+void	ft_draw_line_4(void *mlx, void *win, t_pos A, t_pos B)
 {
 	t_pos	d;
 	t_pos	inc;
@@ -143,7 +180,7 @@ void	ft_draw_line_3(void *mlx, void *win, t_pos A, t_pos B)
 **
 */
 
-void	ft_draw_line_4(void *mlx, void *win, t_pos A, t_pos B)
+void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 {
 	float	fun_choice;
 	float	xinc;

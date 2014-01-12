@@ -52,10 +52,10 @@ int		main(void)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 400, 400, "42");
 	pos_init(&A, 100, 1);
-	pos_init(&B, 20, 30);
+	pos_init(&B, 0, 300);
 	draw(mlx, win, prect, A);
 	draw(mlx, win, prect, B);
-	ft_draw_line(mlx, win, A, B);
+	ft_draw_line_3(mlx, win, A, B);
 //	pos_init(&A, 10, 400);
 //	pos_init(&B, 200, 0);
 //	ft_draw_line(mlx, win, A, B);
