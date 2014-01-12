@@ -1,29 +1,33 @@
-## ########################################################################## ##
-##                                                                            ##
-##                                                        :::      ::::::::   ##
-##   Makefile                                           :+:      :+:    :+:   ##
-##                                                    +:+ +:+         +:+     ##
-##   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        ##
-##                                                +#+#+#+#+#+   +#+           ##
-##   Created: 2014/01/11 05:56:56 by elhmn             #+#    #+#             ##
-##   Updated: 2014/01/11 05:56:56 by elhmn            ###   ########.fr       ##
-##                                                                            ##
-## ########################################################################## ##
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2014/01/12 22:02:30 by bmbarga           #+#    #+#              #
+#    Updated: 2014/01/12 22:15:10 by bmbarga          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+#NAME = fdf
 
 SRC = main.c tools.c ft_draw.c
 
-FLAGS = -Wall -Wextra -Werror 
+#OBJ = $($(SRC): .c=.o)
 
 CC = gcc
 
-LIB = -L /usr/lib64/X11/ -lmlx -lX11 -lXext -lm
+FLAGS = -Wall -Wextra -Werror
 
-LIB42 = -L /usr/lib/ -lmlx -L /usr/X11/lib -lX11 -lXext -lm
+INCLUDES = -I ./includes/
 
-INCLUDE = -I /usr/include/X11 
+LIB = -L./libft -lft -L /usr/X11/lib -lmlx -lX11 -lXext
 
 all: $(SRC)
-	$(CC) $(FLAGS) $(INCLUDE) $(SRC) $(LIB)
+	make -C libft
+	$(CC) $(FLAGS) $(INCLUDES) $(SRC) $(LIB)
 
-42: $(SRC)
-	$(CC) $(FLAGS) $(INCLUDE) $(SRC) $(LIB42)
+#clean:
+#	rm -f 
+re : all

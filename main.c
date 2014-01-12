@@ -3,70 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/10 21:12:37 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/12 19:50:10 by bmbarga          ###   ########.fr       */
+/*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
+/*   Updated: 2014/01/13 00:12:15 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "tools.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int		draw(void *mlx, void *win, t_rect rect, t_pos pos)
+void	file_open(int *fd, char *str)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	while(i < rect.high)
+	if ((*fd = open(str, O_RDONLY)) < 0)
 	{
-		j = 0;
-		while (j < rect.width)
-		{
-			mlx_pixel_put(mlx, win, pos.x + j, pos.y + i, 0x00FF00);
-			usleep(500);
-			j++;
-		}
-		i++;
+		perror("");
+		exit(0);
 	}
-	return (0);
 }
 
-int		main(void)
+/*
+void	vect_init(t_vect *pt, int x, int y, int z)
 {
-	//int 	i;
-	void	*mlx;
-	void	*win;
-	t_rect	rect;
-	t_pos	A;
-	t_pos	B;
-	t_pos	rect_pos;
+		vect->x = x;
+		vect->y = y;
+		vect->z = z;
+}
+*/
 
-	t_rect			prect;
+int		main(void/*int argc, char **argv*/)
+{
+	//int			fd;
+	void		*win;
+	void		*mlx;
+	t_mark		mark;
 
-	prect.high = 5;
-	prect.width = 5;
-	
-	//i = 0;
-	struct_init(&rect_pos, &rect);
+	pos_init(&mark.o, 100, 100);
+	pos_init(&mark.i, mark.o.x + UNIT, mark.o.y);
+	pos_init(&mark.j, mark.o.x - UNIT, mark.o.y + UNIT);
+	pos_init(&mark.k, mark.o.x, mark.o.y - UNIT);
+
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, 400, 400, "42");
-	pos_init(&A, 0, 0);
-	pos_init(&B, 10, 200);
-	draw(mlx, win, prect, A);
-	draw(mlx, win, prect, B);
-	ft_draw_line_5(mlx, win, B, A);
-//	pos_init(&A, 10, 400);
-//	pos_init(&B, 200, 0);
-//	ft_draw_line(mlx, win, A, B);
-	//draw(mlx, win, rect, rect_pos);
-	/*while (i < 400)
-		mlx_pixel_put(mlx, win, 200, 0 + i++, 0xFF0000);
-	i = 0;
-	while (i < 400)
-		mlx_pixel_put(mlx, win, 0 + i++, 200, 0xFF0000);
-	*/
-	sleep(50);
+	win = mlx_new_window(mlx, 800, 600, "FDF");
+	mlx_pixel_put(mlx, win, mark.i.x, mark.i.y, 0xFFFFFF);
+	mlx_pixel_put(mlx, win, mark.j.x, mark.j.y, 0xFFFFFF);
+	mlx_pixel_put(mlx, win, mark.k.x, mark.k.y, 0xFFFFFF);
+	mlx_pixel_put(mlx, win, mark.o.x, mark.o.y, 0xFFFFFF);
+	sleep(60);
 	mlx_destroy_window(mlx, win);
+	/*if (argc == 2)
+	{
+		file_open(&fd, *(argv + 1));
+
+		close(fd);
+	}
+	else
+	{
+		ft_putendl("no file name");
+	}
+	*/
 	return (0);
 }

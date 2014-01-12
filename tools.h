@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 02:27:57 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/12 19:01:38 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 00:10:22 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define TOOLS_H
 # include <mlx.h>
 # include <math.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# define UNIT 25
 
 typedef struct		s_rect
 {
@@ -23,11 +24,35 @@ typedef struct		s_rect
 	int				width;
 }					t_rect;
 
+/*
+typedef struct		t_pt
+{
+	int				x;
+	int				y;
+	int				z;
+}					t_pt;
+
+typedef struct		s_vect
+{
+	int				i;
+	int				j;
+	int				k;
+}					t_vect;
+*/
+
 typedef struct		s_pos
 {
 	int				x;
 	int				y;
 }					t_pos;
+
+typedef	struct	s_mark
+{
+	t_pos		o;
+	t_pos		i;
+	t_pos		j;
+	t_pos		k;
+}				t_mark;
 
 void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B);
 void	struct_init(t_pos *pos, t_rect *rect);

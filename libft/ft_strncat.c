@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 00:13:45 by bmbarga          ###   ########.fr       */
+/*   Created: 2013/11/20 02:09:10 by elhmn             #+#    #+#             */
+/*   Updated: 2013/11/28 04:41:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "tools.h"
+#include <string.h>
+#include "libft.h"
 
-void	struct_init(t_pos *pos, t_rect *rect)
+char	*ft_strncat(char *dest, const char *src, size_t n)
 {
-	rect->high = 50;
-	rect->width = 100;
-	pos->x = 200 - rect->width / 2;
-	pos->y = 200 - rect->high / 2;
-}
+	size_t	i;
+	size_t	len;
 
-void	pos_init(t_pos *pos, int x, int y)
-{
-	pos->x = x;
-	pos->y = y;
+	i = 0;
+	len = ft_strlen(dest);
+	while (src[i] && i != n)
+	{
+		dest[len] = src[i];
+		i++;
+		len++;
+	}
+	dest[len] = '\0';
+	return (dest);
 }
-
-/*
-void	vect_prod(int v, )
-{
-
-}
-*/

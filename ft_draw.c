@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:52:37 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/12 19:53:19 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/12 20:54:10 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,8 @@ void	ft_draw_line_4(void *mlx, void *win, t_pos A, t_pos B)
 void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 {
 	int		fun_choice;
-	int		E;
-	int		NE;
+	int		Ex;
+	int		Ey;
 	int		i;
 	int		incx;
 	int		incy;
@@ -194,41 +194,43 @@ void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 	dy = abs(B.y - A.y);
 	incx = (B.x < A.x) ? -1 : 1;
 	incy = (B.y < A.y) ? -1 : 1;
-	E = 2 * dx;
-	NE = 2 * dy;
+	Ex = 2 * dx;
+	Ey = 2 * dy;
 	i = 0;
 	if (dx > dy)
 	{
-		fun_choice = NE - dx;
+		fun_choice = Ey - dx;
+		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 		while (i < dx)
 		{
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 			if (fun_choice < 0)
-				fun_choice += NE;
+				fun_choice += Ey;
 			else
 			{
-				fun_choice += NE - E;
+				fun_choice += Ey - Ex;
 				A.y += incy;
 			}
 			A.x += incx;
 			i++;
+			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 		}
 	}
 	else
 	{
-		fun_choice = E - dy;
+		fun_choice = Ex - dy;
+		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 		while (i < dy)
 		{
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
-			if (fun_choice > 0)
-				fun_choice += E;
+			if (fun_choice < 0)
+				fun_choice += Ex;
 			else
 			{
-				fun_choice += NE;
+				fun_choice += Ex - Ey;
 				A.x += incx;
 			}
 			A.y += incy;
 			i++;
+			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 		}
 	}
 }
