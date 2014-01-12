@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:52:37 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/11 18:52:37 by elhmn            ###   ########.fr       */
+/*   Updated: 2014/01/12 19:53:19 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	ft_draw_line_3(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 /*
-** algorithme incrementale_2 Bon pour tous les tracer et rapide method I
+** algorithme incrementale_2 Methode de Lucas Bon pour tous les tracer et rapide method I
 ** penser a coder la methode 2 mais aussi et surtout a comprendre parfaitement
 ** cet algo
 */
@@ -176,70 +176,59 @@ void	ft_draw_line_4(void *mlx, void *win, t_pos A, t_pos B)
 }
 
 /*
-** Algo incremental_2_2
-**
+** Algo incrementale algo de bresenham
 */
 
 void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 {
-	float	fun_choice;
-	float	xinc;
-	float	yinc;
-	float		d;
+	int		fun_choice;
+	int		E;
+	int		NE;
 	int		i;
-//	int		dx = B.x - A.x;
-	t_rect	rect;
+	int		incx;
+	int		incy;
+	int		dx;
+	int		dy;
 
-	rect.high = 5;
-	rect.width = 5;
-	int	x = A.x;
-	int	y = A.y;
-//	if (B.x - A.x > 0 || )
-	d = (B.y - A.y) / (B.x - A.x);
-	xinc = -2 * d;
-	yinc = -2 * d + 2;
+	dx = abs(B.x - A.x);
+	dy = abs(B.y - A.y);
+	incx = (B.x < A.x) ? -1 : 1;
+	incy = (B.y < A.y) ? -1 : 1;
+	E = 2 * dx;
+	NE = 2 * dy;
 	i = 0;
-	draw(mlx, win, rect, A);
-	draw(mlx, win, rect, B);
-	if (d < 1)
+	if (dx > dy)
 	{
-		printf("lol\n");
-		fun_choice = d * -2 * (2 * A.x + 1) + 3 * A.y + 1;
-		while (A.x < B.x)
+		fun_choice = NE - dx;
+		while (i < dx)
 		{
-		fun_choice = d * -2 * (A.x + x + 1) + A.y + y + 1;
 			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
-			if (fun_choice > 0)
-			{
-				printf("fun_choice > 0\n");
-		//		fun_choice += xinc;
-			}
+			if (fun_choice < 0)
+				fun_choice += NE;
 			else
 			{
-				printf("fun_choice > 0\n");
-		//		fun_choice += yinc;
-				A.y++;
+				fun_choice += NE - E;
+				A.y += incy;
 			}
-			A.x++;
+			A.x += incx;
 			i++;
 		}
 	}
 	else
 	{
-		d = (B.x - A.x) / (B.y - A.y);
-		fun_choice = d * 2 * A.y + 2 *A.x + 1;
-		while (A.y >= B.y)
+		fun_choice = E - dy;
+		while (i < dy)
 		{
-			printf("lol\n");
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFFFFFF);
+			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
 			if (fun_choice > 0)
-				fun_choice += yinc;
+				fun_choice += E;
 			else
 			{
-				fun_choice += xinc;
-				A.x--;
+				fun_choice += NE;
+				A.x += incx;
 			}
-			A.y--;
+			A.y += incy;
+			i++;
 		}
 	}
 }

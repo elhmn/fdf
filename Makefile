@@ -18,7 +18,12 @@ CC = gcc
 
 LIB = -L /usr/lib64/X11/ -lmlx -lX11 -lXext -lm
 
+LIB42 = -L /usr/lib/ -lmlx -L /usr/X11/lib -lX11 -lXext -lm
+
 INCLUDE = -I /usr/include/X11 
 
 all: $(SRC)
 	$(CC) $(FLAGS) $(INCLUDE) $(SRC) $(LIB)
+
+42: $(SRC)
+	$(CC) $(FLAGS) $(INCLUDE) $(SRC) $(LIB42)

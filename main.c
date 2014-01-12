@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/10 21:12:37 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/10 21:12:37 by elhmn            ###   ########.fr       */
+/*   Updated: 2014/01/12 19:50:10 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int		main(void)
 	struct_init(&rect_pos, &rect);
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 400, 400, "42");
-	pos_init(&A, 100, 1);
-	pos_init(&B, 0, 300);
+	pos_init(&A, 0, 0);
+	pos_init(&B, 10, 200);
 	draw(mlx, win, prect, A);
 	draw(mlx, win, prect, B);
-	ft_draw_line_3(mlx, win, A, B);
+	ft_draw_line_5(mlx, win, B, A);
 //	pos_init(&A, 10, 400);
 //	pos_init(&B, 200, 0);
 //	ft_draw_line(mlx, win, A, B);
