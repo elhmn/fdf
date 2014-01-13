@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 08:42:45 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 09:13:49 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,21 @@ t_pos	det_coord(char **map, int x, int z, t_mark mark)
 	ft_putendl("");
 	return (A);
 }
-
 /*
-void	vect_prod(int v, )
+t_pos	2d_to_3d(int x, int y, int z)
 {
-
+	t_pos	A;
+	int		k;
+	
+	k = 1 - x - y - z;
+	A.x = x * mark.i.x + y * mark.j.x + z * mark.k.x + mark.o.x * k;
+	A.y = x * mark.i.y + y * mark.j.y + z * mark.k.y + mark.o.y * k;
+	return (A);
 }
-*/
+
+void	vect_prod(t_pt u, t_pt v, t_pt w)
+{
+	w.x = u.y * v.z - u.z * v.y;
+	w.y = u.z * v.x - u.x * v.z;
+	w.z = u.x * v.y - u.y * v.x;
+}*/

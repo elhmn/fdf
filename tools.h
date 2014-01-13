@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 02:27:57 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 06:08:40 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 09:16:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "get_next_line.h"
-# define UNIT 25
+# define UNIT 25 
 
 typedef struct		s_rect
 {
@@ -71,6 +71,8 @@ typedef struct s_env
 	void	*win;
 }				t_env;
 
+//t_pos	2d_to_3d(int x, int y, int z);
+//void	vect_prod(t_pt u, t_pt v, t_pt w);
 void	ft_pixel_put(t_env e, t_pos A,int couleur);
 t_pos	det_coord(char **map, int x, int y, t_mark mark);
 void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B);
