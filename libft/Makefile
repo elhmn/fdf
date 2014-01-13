@@ -6,7 +6,7 @@
 #    By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 23:42:45 by bmbarga           #+#    #+#              #
-#    Updated: 2013/12/17 16:24:09 by bmbarga          ###   ########.fr        #
+#    Updated: 2014/01/13 04:19:25 by bmbarga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 
-$(OBJ): 
+$(OBJ): $(SRCS) 
 	$(GWC) -c $(INCLUDES) $(SRCS)
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 02:27:57 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 01:12:44 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 03:07:13 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "get_next_line.h"
 # define UNIT 25
 
 typedef struct		s_rect

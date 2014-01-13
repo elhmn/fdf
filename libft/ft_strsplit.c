@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 05:57:16 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/13 02:49:00 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 05:11:24 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static int		ft_fillmap(char **tab, char *s, char c)
 	{
 		wd_size = ft_get_word_size(s_tmp, &i, c);
 		*tab_tmp = ft_strsub(s_tmp, i, (size_t) wd_size);
-		ft_putstr(*tab_tmp);
 		if (!*tab_tmp)
 			return (0);
 		tab_tmp++;
