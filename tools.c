@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 08:17:33 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 08:42:45 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_pos	det_coord(char **map, int x, int z, t_mark mark)
 	
 	A.x = x * mark.i.x + y * mark.j.x + z * mark.k.x + mark.o.x * k;
 	A.y = x * mark.i.y + y * mark.j.y + z * mark.k.y + mark.o.y * k;
+	
 	ft_putnbr(A.y);
 	ft_putendl("");
 	ft_putnbr(A.x);
