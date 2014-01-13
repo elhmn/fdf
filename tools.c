@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 00:13:45 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 00:19:50 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	pos_init(t_pos *pos, int x, int y)
 	pos->x = x;
 	pos->y = y;
 }
+
+
 
 /*
 void	vect_prod(int v, )

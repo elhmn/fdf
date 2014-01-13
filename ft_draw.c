@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:52:37 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/12 20:54:10 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 00:50:12 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** algo avec fonction afine pas mal mais lent 
 */
 
-void	ft_draw_line(void *mlx, void *win, t_pos A, t_pos B)
+void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 {
 	double		a;
 	double		b;
@@ -179,7 +179,7 @@ void	ft_draw_line_4(void *mlx, void *win, t_pos A, t_pos B)
 ** Algo incrementale algo de bresenham
 */
 
-void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
+void	ft_draw_line(t_env e, t_pos A, t_pos B, int	color)
 {
 	int		fun_choice;
 	int		Ex;
@@ -200,7 +200,7 @@ void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 	if (dx > dy)
 	{
 		fun_choice = Ey - dx;
-		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+		mlx_pixel_put(e.mlx, e.win, A.x, A.y, color);
 		while (i < dx)
 		{
 			if (fun_choice < 0)
@@ -212,13 +212,13 @@ void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 			}
 			A.x += incx;
 			i++;
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+			mlx_pixel_put(e.mlx, e.win, A.x, A.y, color);
 		}
 	}
 	else
 	{
 		fun_choice = Ex - dy;
-		mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+		mlx_pixel_put(e.mlx, e.win, A.x, A.y, color);
 		while (i < dy)
 		{
 			if (fun_choice < 0)
@@ -230,7 +230,7 @@ void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B)
 			}
 			A.y += incy;
 			i++;
-			mlx_pixel_put(mlx, win, A.x, A.y, 0xFF0000);
+			mlx_pixel_put(e.mlx, e.win, A.x, A.y, color);
 		}
 	}
 }
