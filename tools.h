@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 02:27:57 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 03:07:13 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 06:08:40 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ typedef struct s_env
 	void	*win;
 }				t_env;
 
+void	ft_pixel_put(t_env e, t_pos A,int couleur);
+t_pos	det_coord(char **map, int x, int y, t_mark mark);
 void	ft_draw_line_5(void *mlx, void *win, t_pos A, t_pos B);
 void	struct_init(t_pos *pos, t_rect *rect);
 void	pos_init(t_pos *pos, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/13 05:39:43 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 08:20:08 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	ft_setmark(t_env e, t_mark *mark)
 {
 	pos_init(&mark->o, 250, 250);
 	pos_init(&mark->i, mark->o.x + UNIT, mark->o.y);
-	pos_init(&mark->j, mark->o.x - UNIT, mark->o.y + UNIT);//j = i vect_product j penser a le calculer proprement
-	pos_init(&mark->k, mark->o.x, mark->o.y - UNIT);
+	pos_init(&mark->j, mark->o.x + UNIT, mark->o.y + UNIT);//j = i vect_product j penser a le calculer proprement
+	pos_init(&mark->k, mark->o.x, mark->o.y + UNIT);
 	mlx_pixel_put(e.mlx, e.win, mark->i.x, mark->i.y, WHITE);
 	mlx_pixel_put(e.mlx, e.win, mark->j.x, mark->j.y, WHITE);
 	mlx_pixel_put(e.mlx, e.win, mark->k.x, mark->k.y, WHITE);
@@ -87,6 +87,7 @@ void	ft_fdf(t_env e, int fd)
 	i = 0;
 	n_line = 0;
 	str = ft_strnew(0);
+	ft_setmark(e, &mark);
 	while (get_next_line_aux(&tmp, fd))
 	{
 		str = ft_strjoin(str, ft_strcat(tmp, "\n"));
@@ -98,7 +99,8 @@ void	ft_fdf(t_env e, int fd)
 	{
 		*(map + i) = ft_strsplit(*(map_tmp + i), ' ');
 		i++;
-	}
+	}	
+	ft_pixel_put(e, det_coord(*(map + 9), 11, 9, mark), WHITE);
 	/*
 	i = 0;
 	while (i < n_line - 1)
@@ -112,7 +114,6 @@ void	ft_fdf(t_env e, int fd)
 	//printf("nbr_de ligne = %d\n", n_line);
 	//str = ft_strtrim(str);
 	//ft_putstr(str);
-	ft_setmark(e, &mark);
 }
 
 int		main(int argc, char **argv)
