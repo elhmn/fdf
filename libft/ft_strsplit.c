@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 05:57:16 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/13 05:11:24 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 00:28:00 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,28 @@ static int		ft_get_word_size(char *s, unsigned int *i, char c)
 	return (wd_size);
 }
 
-static int		ft_fillmap(char **tab, char *s, char c)
+static int		ft_fillmap(char **tab, char *s, char c, int nbr)
 {
-	char				**tab_tmp;
 	char				*s_tmp;
 	int					wd_size;
 	unsigned int		i;
+	int					j;
 
+	j = 0;
 	i = 0;
-	tab_tmp = tab;
 	s_tmp = s;
 	while (*(s + i) == c)
 		i++;
-	while (*tab_tmp == 0)
+	while (j < nbr)
 	{
 		wd_size = ft_get_word_size(s_tmp, &i, c);
-		*tab_tmp = ft_strsub(s_tmp, i, (size_t) wd_size);
-		if (!*tab_tmp)
+		*(tab + j) = ft_strsub(s_tmp, i, (size_t) wd_size);
+		if (!(*tab + j))
 			return (0);
-		tab_tmp++;
+		j++;
 		i += wd_size;
 	}
+	tab[nbr] = NULL;
 	return (1);
 }
 
@@ -79,8 +80,7 @@ char 			**ft_strsplit(char const *s, char c)
 		tab = (char**) malloc(sizeof(char*) * (nbr + 1));
 		if (!tab)
 			return (NULL);
-		*(tab + nbr) = 0;
-		if (!ft_fillmap(tab, (char*) s, c))
+		if (!ft_fillmap(tab, (char*) s, c, nbr))
 			return (NULL);
 		return (tab);
 	}

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/14 00:03:07 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 00:33:54 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ void	ft_fdf(t_env e, int fd)
 	char		*tmp;
 	int			i;
 	int			n_line;
-	
+	//t_pos		**fdf;
+
 	int		x = 0;
 	int		z = 0;
 	i = 0;
@@ -97,15 +98,27 @@ void	ft_fdf(t_env e, int fd)
 	}
 	map = (char***) malloc(sizeof(char**) * (n_line + 1));
 	map_tmp = ft_strsplit(str, '\n');
-	while (i < n_line)
+	while (map_tmp[i])
 	{
 		*(map + i) = ft_strsplit(*(map_tmp + i), ' ');
 		i++;
 	}
-	while (z != n_line)
+	ft_putendl("ft_strsplit error :");
+	
+	/*
+	fdf = malloc(sizeof(t_pos*) * n_line);
+	*(fdf + n_line) = NULL;
+	while (i < n_line)
+	{
+		fdf + i = malloc(sizeof() * );
+		i++;
+	}
+	*/
+	
+	while (map[z])
 	{	
 		x = 0;
-		while (map[z][x][0])
+		while (map[z][x])
 		{
 			if (ft_atoi(map[z][x]) > 0)
 				ft_pixel_put(e, det_coord(*(map + z), x, z, mark), RED);
@@ -127,7 +140,7 @@ void	ft_fdf(t_env e, int fd)
 	//ft_printmap(11, map_tmp);
 	//printf("nbr_de ligne = %d\n", n_line);
 	//str = ft_strtrim(str);
-	//ft_putstr(str);
+	//ft_putstr(str);*/
 }
 
 int		main(int argc, char **argv)
