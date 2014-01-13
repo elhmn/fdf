@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 09:13:49 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 20:33:22 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_pos	det_coord(char **map, int x, int z, t_mark mark)
 	ft_putendl("");
 	return (A);
 }
+
 /*
 t_pos	2d_to_3d(int x, int y, int z)
 {

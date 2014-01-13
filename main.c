@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/13 09:19:54 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 00:03:07 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_setmark(t_env e, t_mark *mark)
 	pos_init(&mark->o, 250, 250);
 	pos_init(&mark->i, mark->o.x + UNIT, mark->o.y);
 	pos_init(&mark->k, mark->o.x - UNIT, mark->o.y + UNIT);
-	pos_init(&mark->j, mark->o.x, mark->o.y - UNIT);//j = i vect_product j penser a le calculer proprement
+	pos_init(&mark->j, mark->o.x + 1, mark->o.y - 4);//j = i vect_product j penser a le calculer proprement
 	mlx_pixel_put(e.mlx, e.win, mark->i.x, mark->i.y, WHITE);
 	mlx_pixel_put(e.mlx, e.win, mark->j.x, mark->j.y, WHITE);
 	mlx_pixel_put(e.mlx, e.win, mark->k.x, mark->k.y, WHITE);
@@ -107,7 +107,10 @@ void	ft_fdf(t_env e, int fd)
 		x = 0;
 		while (map[z][x][0])
 		{
-			ft_pixel_put(e, det_coord(*(map + z), x, z, mark), WHITE);
+			if (ft_atoi(map[z][x]) > 0)
+				ft_pixel_put(e, det_coord(*(map + z), x, z, mark), RED);
+			else
+				ft_pixel_put(e, det_coord(*(map + z), x, z, mark), WHITE);
 			x++;
 		}
 		z++;

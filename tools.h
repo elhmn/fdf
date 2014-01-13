@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 02:27:57 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 09:16:14 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/13 23:16:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ typedef struct		t_pt
 	int				z;
 }					t_pt;
 
-/*
+
 typedef struct		s_vect
 {
 	int				i;
 	int				j;
 	int				k;
 }					t_vect;
-*/
+
 
 typedef struct		s_pos
 {
