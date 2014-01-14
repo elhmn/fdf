@@ -20,13 +20,18 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-INCLUDES = -I ./includes/
+INCLUDES = -I ./includes/ -I /usr/lib64/X11/
 
-LIB = -L./libft -lft -L /usr/X11/lib -lmlx -lX11 -lXext
+LIB42 = -L./libft -lft -L /usr/X11/lib -lmlx -lX11 -lXext
+LIB = -L./libft -lft -L /usr/lib64/X11 -lm -lmlx -lX11 -lXext
 
 all: $(SRC)
 	make -C libft
 	$(CC) $(FLAGS) $(INCLUDES) $(SRC) $(LIB)
+
+42: $(SRC)
+	make -C libft
+	$(CC) $(FLAGS) $(INCLUDES) $(SRC) $(LIB42)
 
 #clean:
 #	rm -f 
