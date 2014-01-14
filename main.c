@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/14 00:33:54 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 01:41:29 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ void	ft_fdf(t_env e, int fd)
 	char		*tmp;
 	int			i;
 	int			n_line;
-	//t_pos		**fdf;
-
+	t_pos		**fdf;
+	int			x_len;
 	int		x = 0;
 	int		z = 0;
+
 	i = 0;
 	n_line = 0;
+	x_len = 0;
 	str = ft_strnew(0);
 	ft_setmark(e, &mark);
 	while (get_next_line_aux(&tmp, fd))
@@ -96,26 +98,60 @@ void	ft_fdf(t_env e, int fd)
 		str = ft_strjoin(str, ft_strcat(tmp, "\n"));
 		n_line++;
 	}
-	map = (char***) malloc(sizeof(char**) * (n_line + 1));
+	map = (char***) malloc(sizeof(char**) *  (n_line));
 	map_tmp = ft_strsplit(str, '\n');
 	while (map_tmp[i])
 	{
 		*(map + i) = ft_strsplit(*(map_tmp + i), ' ');
 		i++;
 	}
-	ft_putendl("ft_strsplit error :");
-	
-	/*
-	fdf = malloc(sizeof(t_pos*) * n_line);
-	*(fdf + n_line) = NULL;
+	while (map[z][x])
+	{
+		x++;
+		x_len++;
+	}
+	fdf = malloc(sizeof(t_pos*) * (n_line));
+	i = 0;
 	while (i < n_line)
 	{
-		fdf + i = malloc(sizeof() * );
+		*(fdf + i) = malloc(sizeof(t_pos) * (x_len + 1));
 		i++;
 	}
-	*/
-	
 	while (map[z])
+	{	
+		x = 0;
+		while (map[z][x])
+		{
+			if (ft_atoi(map[z][x]) > 0)
+				ft_pixel_put(e, fdf[z][x] = det_coord(*(map + z), x, z, mark), RED);
+			else
+				ft_pixel_put(e, fdf[z][x] = det_coord(*(map + z), x, z, mark), WHITE);
+			x++;
+		}
+		z++;
+	}
+	z = 0;
+	while (map[z])
+	{
+		x = 0;
+		while (fdf[z][x].y)//condition d arret a revoir
+		{
+			//ft_putendl("*********************************\n");
+		//	ft_putnbr(fdf[z][x].x);
+		//	ft_putendl("");
+			if (x != 0)
+				ft_draw_line(e, fdf[z][x], fdf[z][x - 1], WHITE);
+			if (z != 0)
+				ft_draw_line(e, fdf[z][x], fdf[z - 1][x], WHITE);	
+			x++;
+		}
+		z++;
+	} 
+		ft_putstr(" z == ");
+		ft_putnbr(z);
+		ft_putendl("");
+	z = 0;
+/*	while (map[z])
 	{	
 		x = 0;
 		while (map[z][x])
@@ -128,15 +164,14 @@ void	ft_fdf(t_env e, int fd)
 		}
 		z++;
 	}
-	/*
+//
 	i = 0;
 	while (i < n_line - 1)
 	{
 		ft_printmap(*(map + i));
 		ft_putendl("");
 		i++;
-	}
-	*/
+	}	
 	//ft_printmap(11, map_tmp);
 	//printf("nbr_de ligne = %d\n", n_line);
 	//str = ft_strtrim(str);

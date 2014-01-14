@@ -6,7 +6,7 @@
 /*   By: elhmn <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/11 18:54:42 by elhmn             #+#    #+#             */
-/*   Updated: 2014/01/13 20:33:22 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 01:26:24 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,20 @@ t_pos	det_coord(char **map, int x, int z, t_mark mark)
 	y = ft_atoi(map[x]);
 	k = 1 - x - y - z;
 	
-	ft_putendl(map[x]);
-	ft_putendl("");
-	ft_putnbr(mark.j.x);
-	ft_putendl("");
-	ft_putnbr(mark.j.y);
-	ft_putendl("");
+//	ft_putendl(map[x]);
+//	ft_putendl("");
+//	ft_putnbr(mark.j.x);
+//	ft_putendl("");
+//	ft_putnbr(mark.j.y);
+//	ft_putendl("");
 	
 	A.x = x * mark.i.x + y * mark.j.x + z * mark.k.x + mark.o.x * k;
 	A.y = x * mark.i.y + y * mark.j.y + z * mark.k.y + mark.o.y * k;
 	
-	ft_putnbr(A.y);
-	ft_putendl("");
-	ft_putnbr(A.x);
-	ft_putendl("");
+//	ft_putnbr(A.y);
+//	ft_putendl("");
+//	ft_putnbr(A.x);
+//	ft_putendl("");
 	return (A);
 }
 
