@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/14 01:41:29 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 01:45:10 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
+
+/*
+** projet incomplet et pas a la norme
+*/
 
 void	file_open(int *fd, char *str)
 {
