@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 21:50:18 by bmbarga           #+#    #+#             */
-/*   Updated: 2014/01/14 01:45:10 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/01/14 01:48:00 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 /*
 ** projet incomplet et pas a la norme
+** a faire : gestion de degrade de couleur
+** suppression des faces caches
+** gestion de fichier avec differente taille de ligne
+** et puis mettre un peu d ordre dans tout ca
 */
 
 void	file_open(int *fd, char *str)
