@@ -5,34 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 17:06:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:32:26 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 18:53:10 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 18:55:08 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+char *ft_strnstr(const char *s1, const char *s2, size_t n)
 {
-	char	*tmp_1;
-	char	*tmp_2;
-	char	*tmp;
+	size_t len;
 
-	tmp_1 = (char*)s1;
-	while (*tmp_1 && tmp_1 != s1 + n)
+	if (!*s2)
+		return ((char *)s1);
+	len = 0;
+	while (s2[len])
+		len++;
+	while (n-- >= len && *s1)
 	{
-		tmp = tmp_1;
-		tmp_2 = (char*)s2;
-		while (*tmp_1 == *tmp_2 && *tmp_2 && tmp_1 != s1 + n)
-		{
-			tmp_2++;
-			tmp_1++;
-		}
-		if ((!(*tmp_1) && *tmp_2) || ((tmp_1 == s1 + n) && *tmp_2))
-			return (NULL);
-		if (!(*tmp_2))
-			return (tmp);
-		tmp_1++;
+		if (*s1 == *s2 && !ft_memcmp(s1, s2, len))
+			return ((char *)s1);
+		s1++;
 	}
-	return (NULL);
+	return (0);
 }

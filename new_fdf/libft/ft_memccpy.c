@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 19:43:41 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/11/28 03:55:02 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/03 11:04:34 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ void		*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	car = (char)c;
 	tmp_s = (char*)src;
 	tmp_d = (char*)dest;
-	while (n != 0 && *tmp_s != car)
+	if (dest && src)
 	{
-		*tmp_d = *tmp_s;
-		tmp_d++;
-		tmp_s++;
-		n--;
-	}
-	if (*tmp_s == car)
-	{
-		*tmp_d = *tmp_s;
-		return ((void*)++tmp_d);
+		while (n != 0 && *tmp_s != car)
+		{
+			*tmp_d = *tmp_s;
+			tmp_d++;
+			tmp_s++;
+			n--;
+		}
+		if (*tmp_s == car)
+		{
+			*tmp_d = *tmp_s;
+			return ((void*)++tmp_d);
+		}
 	}
 	return (NULL);
 }

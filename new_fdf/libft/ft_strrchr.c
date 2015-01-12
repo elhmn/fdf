@@ -5,23 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 15:48:01 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/11/28 04:25:53 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:39:33 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:39:34 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+char *ft_strrchr(const char *s, int c)
 {
-	char	*tmp;
+	const char *ret;
 
-	tmp = (char*)s;
-	while (*tmp)
-		tmp++;
-	while (*tmp != c && *tmp != *s)
-		tmp--;
-	if (*tmp != c)
-		return (NULL);
-	return (tmp);
+	ret = 0;
+	while (*s)
+	{
+		if (*s == (char)c)
+			ret = s;
+		s++;
+	}
+	if (*s == (char)c)
+		ret = s;
+	return ((char *)ret);
 }

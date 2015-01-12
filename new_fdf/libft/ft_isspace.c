@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 15:12:37 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/02 20:58:47 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:20:34 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:20:39 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int ft_isspace(int c)
 {
-	char	*tmp;
-
-	tmp = (char*)s;
-	if (s)
-	{
-		while (*tmp != c && *tmp)
-			tmp++;
-		if (*tmp != c)
-			return (NULL);
-	}
-	return (tmp);
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+			|| c == ' ')
+		return (1);
+	return (0);
 }

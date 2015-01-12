@@ -5,17 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 17:21:30 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/11/28 04:04:39 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:32:05 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:32:08 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
+#include "libft.h"
+
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i])
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	return (s1[i] - s2[i]);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 05:43:54 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/11/29 07:00:33 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/03 10:48:37 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_lstiter(t_list *lst, void (*f) (t_list *elem))
 {
-	if (lst)
+	if (lst && f)
 	{
 		if (lst->next == NULL)
 			f(lst);

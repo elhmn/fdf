@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/29 04:05:24 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/02 20:20:33 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/12 09:43:15 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/12 09:52:43 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "libft.h"
+#include <fcntl.h>
+#include "get_next_line.h"
 
-void	ft_lstdel(t_list **alst, void (*del) (void*, size_t))
+int		main(int ac, char **av)
 {
-	if (alst && *alst && del)
+	int		fd;
+	int		ret;
+	char	*line;
+	int		i;
+
+	fd = 0;
+	i = 1;
+	if (ac == 2)
+		if (!(fd = open(av[1], O_RDONLY)) == -1)
+				perror("fd");
+	if (ac > 2)
+		return (-1);
+	while ((ret = get_next_line(fd, &line)))
 	{
-		if ((*alst)->next == NULL)
-			ft_lstdelone(alst, del);
-		else
+		if (ret == -1)
 		{
-			ft_lstdel(&(*alst)->next, del);
-			ft_lstdelone(alst, del);
+			printf("Error while reading file\n");
+			break;
 		}
+		printf("%d --> [%s]\n", i, line);
+		i++;
+		free(line);
 	}
+	return (0);
 }

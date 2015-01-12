@@ -5,53 +5,46 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/26 05:50:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:22:14 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:21:40 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:21:57 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "stdlib.h"
 #include "libft.h"
 
-static int	ft_get_nbr_size(int n)
+static size_t	length(int n)
 {
-	int		size;
+	size_t	i;
 
-	size = 0;
-	if (n < 0)
-		size++;
-	while ((n /= 10))
-		size++;
-	return (size + 1);
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
 }
 
-static char	*ft_fill_car_nbr(char **car_nbr, int n, int i)
+char			*ft_itoa(int n)
 {
-	if (!(n / 10))
-	{
-		*(*car_nbr + i) = n + '0';
-		return (*car_nbr);
-	}
-	ft_fill_car_nbr(car_nbr, n / 10, i - 1);
-	ft_fill_car_nbr(car_nbr, n % 10, i);
-	return (*car_nbr);
-}
+	size_t	len;
+	char	*str;
+	int		sign;
 
-char		*ft_itoa(int n)
-{
-	int		size;
-	char	*car_nbr;
-
-	if (n > MAX_NBR || n < MIN_NBR)
-		return (NULL);
-	size = ft_get_nbr_size(n);
-	car_nbr = ft_strnew((size_t)size);
+	if (n == -2147483647 - 1)
+		return ("-2147483648");
+	len = length(n);
+	sign = 0;
 	if (n < 0)
 	{
-		car_nbr[0] = '-';
-		n *= -1;
+		n = -n;
+		sign = 42;
+		len++;
 	}
-	ft_fill_car_nbr(&car_nbr, n, size - 1);
-	return (car_nbr);
+	str = ft_strnew(len);
+	if (!str)
+		return (0);
+	str[--len] = n % 10 + '0';
+	while (n /= 10)
+		str[--len] = n % 10 + '0';
+	if (sign)
+		str[0] = '-';
+	return (str);
 }

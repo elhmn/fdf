@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 13:48:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 20:25:21 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 09:17:59 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef void	(*t_ferr)(void);
 enum	e_code
 {
 	MALLOC,
-	NUL
+	NUL,
 };
 
 /*
@@ -42,5 +42,6 @@ void		f_nul(void);
 */
 
 void	check_errors(t_uint code, char *file_name, char *var_name);
+void	sys_errors(char *str);
 
 #endif

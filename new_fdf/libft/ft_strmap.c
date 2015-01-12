@@ -5,28 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/21 03:31:07 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:28:23 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:39:06 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:39:07 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-char		*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char	*new_str;
-	int		i;
+	char	*str;
+	size_t	i;
 
+	if (!s || !f)
+		return (0);
+	str = ft_strnew(ft_strlen(s));
+	if (!str)
+		return (0);
 	i = 0;
-	new_str = ft_strnew(ft_strlen(s));
-	if (!new_str)
-		return (NULL);
-	while (*(s + i))
+	while (s[i])
 	{
-		*(new_str + i) = f(*(s + i));
+		str[i] = f(s[i]);
 		i++;
 	}
-	return (new_str);
+	return (str);
 }

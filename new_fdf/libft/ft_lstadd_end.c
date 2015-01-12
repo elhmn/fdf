@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/03 20:37:26 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:35:14 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/04/20 15:56:00 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 void	ft_lstadd_end(t_list **alst, t_list *new)
 {
-	t_list	*list_tmp;
+	t_list *list_tmp;
 
 	list_tmp = *alst;
-	while (list_tmp->next)
-		list_tmp = list_tmp->next;
-	alst = &list_tmp;
-	(*alst)->next = new;
+	if (*alst)
+	{
+		while (list_tmp->next)
+			list_tmp = list_tmp->next;
+		alst = &list_tmp;
+		(*alst)->next = new;
+	}
 }

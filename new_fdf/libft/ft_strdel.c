@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 02:49:23 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/12/05 16:41:35 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/04/20 16:47:18 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_strdel(char **as)
 {
-	if (*as && as)
+	if (as && *as)
 	{
 		free(*as);
 		*as = NULL;

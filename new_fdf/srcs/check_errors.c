@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 17:15:13 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 20:25:26 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 10:16:58 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static void	fun_error_init(t_ferr *f)
 		ft_putendl("Error : f :: check_errors.c :: set to NULL ");
 		exit(-1);
 	}
+}
+
+void		sys_errors(char *str)
+{
+	perror(str);
+	exit(0);
 }
 
 void		check_errors(t_uint code, char *file_name, char *var_name)

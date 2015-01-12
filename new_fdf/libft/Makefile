@@ -6,7 +6,7 @@
 #    By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 23:42:45 by bmbarga           #+#    #+#              #
-#    Updated: 2015/01/05 14:55:32 by bmbarga          ###   ########.fr        #
+#    Updated: 2015/01/12 09:38:20 by bmbarga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,14 @@ SRCS =	ft_isprint.c	ft_isalnum.c	ft_isdigit.c	ft_isalpha.c  \
 		ft_strdel.c		ft_strclr.c		ft_striter.c	ft_striteri.c \
 		ft_strmap.c		ft_strmapi.c	ft_strequ.c		ft_strnequ.c  \
 		ft_strsub.c		ft_strjoin.c	ft_strtrim.c	ft_memcpy.c   \
-		ft_memccpy.c	ft_memmove.c	ft_memset.c		ft_bzero.c	  \
-		ft_itoa.c		ft_strsplit.c	ft_lstnew.c		ft_lstdel.c	  \
+		ft_memccpy.c	ft_memmove.c	ft_memset.c		ft_bzero.c    \
+		ft_itoa.c		ft_strsplit.c	ft_lstnew.c		ft_lstdel.c  \
 		ft_lstdelone.c	ft_lstiter.c	ft_lstadd.c		ft_lstmap.c   \
-		ft_lstadd_end.c
+		ft_lstadd_end.c ft_isspace.c
 
 OBJ = $(SRCS:.c=.o)
 
-INCLUDES = -I ./includes/
+INCLUDES = -I ../includes/
 
 all: $(NAME)
 

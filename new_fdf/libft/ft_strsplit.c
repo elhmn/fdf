@@ -5,84 +5,76 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/21 05:57:16 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:36:03 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 18:56:45 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 18:56:48 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
+#include <stdlib.h>
 
-static int		ft_get_words_nbr(int nbr, char *tmp, char c)
+static size_t	ft_word_nb(char const *s, char c)
 {
-	while (*tmp)
+	size_t	word_nb;
+
+	word_nb = ((*s == c) ? (0) : (1));
+	while (*s)
 	{
-		if (*(tmp - 1) == c && *tmp != c)
-			nbr++;
-		tmp++;
+		if (*s == c && *(s + 1) != c && *(s + 1))
+			word_nb++;
+		s++;
 	}
-	return (nbr);
+	return (word_nb);
 }
 
-static int		ft_get_word_size(char *s, unsigned int *i, char c)
+static size_t	ft_word_len(char const *s, char c)
 {
-	int	wd_size;
+	size_t	word_len;
 
-	wd_size = 0;
-	while (*(s + *i) == c)
-		(*i)++;
-	while (*(s + (*i + wd_size)) != c && *(s + (*i + wd_size)) != '\0')
-		wd_size++;
-	return (wd_size);
+	word_len = 0;
+	while (*s != c && *s)
+	{
+		s++;
+		word_len++;
+	}
+	return (word_len);
 }
 
-static int		ft_fillmap(char **tab, char *s, char c, int nbr)
+static void		ft_free_tab(char **tab, int i)
 {
-	char				*s_tmp;
-	int					wd_size;
-	unsigned int		i;
-	int					j;
-
-	j = 0;
-	i = 0;
-	s_tmp = s;
-	while (*(s + i) == c)
-		i++;
-	while (j < nbr)
+	while (i >= 0)
 	{
-		wd_size = ft_get_word_size(s_tmp, &i, c);
-		*(tab + j) = ft_strsub(s_tmp, i, (size_t)wd_size);
-		if (!(*tab + j))
-			return (0);
-		j++;
-		i += wd_size;
+		free(tab[i]);
+		i--;
 	}
-	tab[nbr] = NULL;
-	return (1);
+	free(tab);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	int			nbr;
-	char		**tab;
-	char		*tmp;
+	char	**tab;
+	size_t	i;
 
-	tmp = (char*)s;
-	while (*tmp == c)
-		tmp++;
-	if (tmp == s)
-		nbr = ft_get_words_nbr(1, tmp + 1, c);
-	else
-		nbr = ft_get_words_nbr(0, tmp, c);
-	if (nbr)
+	if (!s)
+		return (NULL);
+	if (!(tab = malloc(ft_word_nb(s, c) * sizeof(char *) + 1)))
+		return (NULL);
+	i = 0;
+	while (*s)
 	{
-		tab = (char**)malloc(sizeof(char*) * (nbr + 1));
-		if (!tab)
-			return (NULL);
-		if (!ft_fillmap(tab, (char*)s, c, nbr))
-			return (NULL);
-		return (tab);
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			if (!(tab[i] = ft_strsub(s, 0, ft_word_len(s, c))))
+			{
+				ft_free_tab(tab, i);
+				return (NULL);
+			}
+			s += ft_word_len(s, c);
+			i++;
+		}
 	}
-	return (NULL);
+	tab[i] = '\0';
+	return (tab);
 }

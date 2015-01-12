@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 03:17:07 by bmbarga           #+#    #+#             */
-/*   Updated: 2013/11/28 04:11:05 by bmbarga          ###   ########.fr       */
+/*   Updated: 2014/04/20 16:51:29 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ void	ft_striteri(char *s, void (*f) (unsigned int, char*))
 	unsigned int	i;
 
 	i = 0;
-	while (*(s + i))
+	while (s && *(s + i) && f)
 	{
 		f(i, s + i);
 		i++;

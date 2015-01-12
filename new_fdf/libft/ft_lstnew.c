@@ -5,32 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/29 02:02:06 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 18:34:11 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/05 17:27:20 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/05 17:27:24 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 #include <stdlib.h>
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list		*new_elem;
+	t_list	*new;
 
-	new_elem = (t_list*)malloc(sizeof(t_list));
-	if (!new_elem)
-		return (NULL);
-	if (!content)
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (0);
+	if (content)
 	{
-		new_elem->content = NULL;
-		new_elem->content_size = 0;
+		new->content = malloc(content_size);
+		if (!new->content)
+			return (0);
+		new->content_size = content_size;
+		ft_memcpy(new->content, content, content_size);
 	}
 	else
 	{
-		new_elem->content = (void*)content;
-		new_elem->content_size = content_size;
+		new->content = NULL;
+		new->content_size = 0;
 	}
-	new_elem->next = NULL;
-	return (new_elem);
+	new->next = NULL;
+	return (new);
 }

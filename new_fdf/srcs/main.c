@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:26:48 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/11 21:50:31 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 10:39:58 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int		main(int ac, char **av)
 	t_fdf	*fdf;
 
 	fdf = NULL;
-	av = av;
 	if (ac == 2)
 	{
-		get_data();
 		init_env(&fdf);
+		get_data(fdf, av[1]);
 		mlx_key_hook(fdf->win, keyRelease_hook, fdf);
 		mlx_hook(fdf->win, KeyPress, KeyPressMask, keyPress_hook, fdf);
 		mlx_loop_hook(fdf->mlx, loop_hook, fdf);

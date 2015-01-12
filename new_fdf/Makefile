@@ -6,14 +6,14 @@
 #    By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/12 22:02:30 by bmbarga           #+#    #+#              #
-#    Updated: 2015/01/11 21:14:51 by bmbarga          ###   ########.fr        #
+#    Updated: 2015/01/12 10:39:25 by bmbarga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 SRC = main.c get_next_line.c check_errors.c fun_err_01.c destroy_env.c \
-	  init_env.c event_handle.c
+	  init_env.c event_handle.c get_map.c debug_01.c
 
 SRCDIR = ./srcs/
 
@@ -43,4 +43,4 @@ clean:
 fclean:
 	make -C libft fclean
 	rm  -rf $(NAME)
-re : fclean all
+	re : fclean all

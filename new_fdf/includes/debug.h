@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/20 15:12:37 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/02 20:58:47 by bmbarga          ###   ########.fr       */
+/*   Created: 2015/01/12 10:33:50 by bmbarga           #+#    #+#             */
+/*   Updated: 2015/01/12 11:41:34 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef DEBUG_H
+# define DEBUG_H
 
-char	*ft_strchr(const char *s, int c)
+# include "libft.h"
+
+enum	e_type
 {
-	char	*tmp;
+	INT,
+	CHAR
+};
 
-	tmp = (char*)s;
-	if (s)
-	{
-		while (*tmp != c && *tmp)
-			tmp++;
-		if (*tmp != c)
-			return (NULL);
-	}
-	return (tmp);
-}
+/*
+** debug_01.h
+*/
+
+void		print_type(char *str, void *elem, int type);
+void		print_map(char **map);
+
+#endif
