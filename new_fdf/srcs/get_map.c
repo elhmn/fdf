@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:42:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 11:42:17 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 15:00:47 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,43 @@ static	void	secu_strjoin(char **s1, char *s2)
 	free(tmp);
 }
 
-static char	**get_map(int fd, int h, int w)
+static char		***build_map(char ***map, int size)
+{
+	char	***tab;
+	char	**tmp;
+	int		i;
+
+	tmp = *map;
+	i = -1;
+	if (!(tab = (char***)malloc(sizeof(char**) * (size + 1))))
+		check_errors(MALLOC, "tab", "get_map.c");
+	while (++i < size)
+	{
+//		print_type("i", &i, INT);/************/
+		tab[i] = ft_strsplit(tmp[i], ' ');
+//		print_map(tab[i]); /**************/
+	}
+	tab[size] = NULL;
+	return (tab);
+}
+
+static int		map_size(char **map)
+{
+	int		len;
+
+	len = 0;
+	if (map)
+	{
+		while (*map++)
+			len++;
+	}
+	return (len);
+}
+
+static char		***get_map(int fd, int h, int w)
 {
 	char	**map;
+	char	***tab;
 	char	*line;
 	char	*str;
 	int		ret;
@@ -39,19 +73,21 @@ static char	**get_map(int fd, int h, int w)
 			sys_errors("ret");
 		secu_strjoin(&str, line);
 		secu_strjoin(&str, "\n");
-		h++;
 		free(line);
 	}
 	map = ft_strsplit(str, '\n');
-	print_map(map);
-	w++;
-	map = map; /******* a virer ********/
-	return (map);
+	h = map_size(map);
+//	print_type("h ou hauteur", &h, INT);/************/
+	tab = build_map(&map, h);
+	print_tab(tab);
+//	print_map(map); /*****************/
+	w = w; /******* A Virer ****/
+	return (tab);
 }
 
 void		get_data(t_fdf *fdf, char *path)
 {
-	char	**map;
+	char	***map;
 	int		fd;
 	int		h;
 	int		w;

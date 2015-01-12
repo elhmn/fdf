@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 10:28:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 11:40:52 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 15:05:28 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,26 @@ void		print_map(char **map)
 			ft_putendl("]");
 			map++;
 		}
+	}
+}
+
+void		print_tab(char ***tab)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (*(tab + ++i))
+	{
+		j = -1;
+		while (*(tab[i] + ++j))
+		{
+			ft_putstr("[");
+			ft_putstr(tab[i][j]);
+			ft_putstr("]");
+			if (tab[i][j + 1])
+				ft_putstr(" ");
+		}
+		ft_putendl("");
 	}
 }
