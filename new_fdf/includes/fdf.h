@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 16:49:16 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 17:04:48 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ struct			s_fdf
 	int			refresh;
 	t_base		base;
 	t_coord		**tab;
+	int			tab_h;
 };
 
 /*
