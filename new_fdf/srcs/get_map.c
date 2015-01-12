@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:42:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 15:00:47 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/12 15:07:25 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static char		***get_map(int fd, int h, int w)
 	h = map_size(map);
 //	print_type("h ou hauteur", &h, INT);/************/
 	tab = build_map(&map, h);
-	print_tab(tab);
 //	print_map(map); /*****************/
 	w = w; /******* A Virer ****/
 	return (tab);
@@ -98,7 +97,7 @@ void		get_data(t_fdf *fdf, char *path)
 	if ((fd = open(path, O_RDONLY)) == -1)
 		sys_errors("fd");
 	map = get_map(fd, h, w);
-	map = map; /******* a virer ********/
+	print_tab(map);
 	if (close(fd) == -1)
 		sys_errors("fd");
 }
