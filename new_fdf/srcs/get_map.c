@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:42:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 12:25:02 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 13:02:43 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ static char		***build_map(char ***map, int size)
 		check_errors(MALLOC, "tab", "get_map.c");
 	while (++i < size)
 	{
-//		print_type("i", &i, INT);/************/
 		tab[i] = ft_strsplit(tmp[i], ' ');
-//		print_map(tab[i]); /**************/
 	}
 	tab[size] = NULL;
 	return (tab);
@@ -77,9 +75,7 @@ static char		***get_map(int fd, t_fdf *fdf)
 	}
 	map = ft_strsplit(str, '\n');
 	fdf->tab_h = map_size(map);
-//	print_type("h ou hauteur", &h, INT);/************/
 	tab = build_map(&map, fdf->tab_h);
-//	print_map(map); /*****************/
 	return (tab);
 }
 

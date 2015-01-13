@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 10:08:05 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 14:24:48 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int		loop_hook(void *param)
 	fdf = (void*)param;
 	if (fdf->refresh)
 	{
+//		placer les points
+//		tracer
 //		ft_putendl("je suis con"); /*****************/
+//		clear image
+//		put image on window
 		fdf->refresh = 0;
 	}
 	return (0);

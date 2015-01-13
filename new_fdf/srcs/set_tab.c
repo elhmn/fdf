@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:50:59 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 12:32:57 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 13:26:45 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void		set_tab(char ***map, t_fdf *fdf)
 		while (*(map + ++i))
 		{
 			len = line_size(*(map + i));
-//			print_type("line_size", &len, INT); /************/
-//			print_type("fdf->tab_h", &fdf->tab_h, INT); /*****************/
 			*(fdf->tab + i) = (t_coord*)malloc(sizeof(t_coord) * (len + 1));
 			if (!(fdf->tab + i))
 				check_errors(MALLOC, "fdf->tab + i", "set_tab.c");
@@ -58,6 +56,9 @@ void		set_tab(char ***map, t_fdf *fdf)
 				fdf->tab[i][j].pt.y = i;
 				fdf->tab[i][j].pt.z = ft_atoi(map[i][j]);
 				fdf->tab[i][j].end = 1;
+				//get 2D pos
+//				fdf->tab[i][j].pos.x = ;
+//				fdf->tab[i][j].pos.y = ;
 			}
 			fdf->tab[i][j].end = 0;
 		}
