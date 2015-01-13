@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 15:01:09 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 10:03:22 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		loop_hook(void *param)
 	fdf = (void*)param;
 	if (fdf->refresh)
 	{
-		ft_putendl("je suis con"); /*****************/
+//		ft_putendl("je suis con"); /*****************/
 		fdf->refresh = 0;
 	}
 	return (0);
