@@ -6,10 +6,11 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 10:28:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 15:06:58 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 11:52:09 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include "debug.h"
 
 void		print_type(char *str, void *elem, int type)
@@ -46,6 +47,36 @@ void		print_map(char **map)
 			ft_putendl("]");
 			map++;
 		}
+	}
+}
+
+void		print_coord(t_coord **tab, int size)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < size)
+	{
+		j = -1;
+		while (tab[i][++j].end)
+		{
+			ft_putstr("tab[");
+			ft_putnbr(i);
+			ft_putstr("]");
+			ft_putstr("[");
+			ft_putnbr(j);
+			ft_putstr("] = [");
+			ft_putnbr(tab[i][j].pt.x);
+			ft_putstr("], [");
+			ft_putnbr(tab[i][j].pt.y);
+			ft_putstr("], [");
+			ft_putnbr(tab[i][j].pt.z);
+			ft_putstr("]");
+			if (tab[i][j + 1].end)
+				ft_putstr(" || ");
+		}
+		ft_putendl("");
 	}
 }
 

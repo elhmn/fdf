@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/12 17:04:48 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 11:21:37 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ struct			s_coord
 {
 	t_pt		pt;
 	t_pos		pos;
+	int			end;
 };
 
 /*
@@ -113,5 +114,11 @@ int				loop_hook(void *param);
 */
 
 void			get_data(t_fdf *fdf, char *path);
+
+/*
+** set_tab.c
+*/
+
+void			set_tab(char ***map, t_fdf *fdf);
 
 #endif
