@@ -6,11 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2015/01/13 19:13:06 by bmbarga          ###   ########.fr       */
-=======
-/*   Updated: 2015/01/13 14:24:48 by bmbarga          ###   ########.fr       */
->>>>>>> 4ac5663dc54ca011e8088e3f4db1868021857bf1
+/*   Updated: 2015/01/14 01:45:40 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +39,6 @@ int		keyPress_hook(int key, void *param)
 	return (0);
 }
 
-	if (!(fdf->bg = mlx_new_image(tmp->mlx, WIDTH, HEIGH)))
-		check_errors(MALLOC, "init_env.c", "tmp->bg");
 int		loop_hook(void *param)
 {
 	t_fdf	*fdf;
