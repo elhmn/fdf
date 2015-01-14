@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 05:48:47 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 08:49:07 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_color	t_color;
 # define	MASK_R		0xFF0000
 # define	MASK_G		0x00FF00
 # define	MASK_B		0x0000FF
+# define	COL			0xFF0000
 
 struct				s_color
 {
@@ -176,7 +177,7 @@ void			set_tab(char ***map, t_fdf *fdf);
 */
 
 void		draw_fdf(t_fdf *fdf);
-void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay);
+void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay, t_fdf *fdf);
 
 /*
 ** color.c

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 06:29:30 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 09:17:29 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 #include "debug.h"
 #include "check_errors.h"
 
-void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay)
+void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay, t_fdf *fdf)
 {
 	int		size;
 	int		i;
 
 	i = 0;
+	fdf = fdf; /****************/
 	if (col && image)
 	{
 		size = lay.line;
+		print_type("lay.line", &(lay.line), INT);
+		print_type("lay.endian", &(lay.endian), INT);
+		print_type("lay.bpp", &(lay.bpp), INT);
+		print_color(col);
 		while (i < 4 && !image[(y * (size)) + x + i])
 			i++;
-		print_type("i", &i, INT);
-		print_color(col);
 		if (i == 4 && size > 0 && x < WIDTH * (lay.bpp / 8))
 		{
-			image[(y * (size)) + x + 0] = col->r;
+//			image[(y * (size)) + x] = mlx_get_color_value(fdf->mlx, col->color);
+			image[(y * (size)) + x + 0] = col->b;
 			image[(y * (size)) + x + 1] = col->g;
-			image[(y * (size)) + x + 2] = col->b;
+			image[(y * (size)) + x + 2] = col->r;
 			image[(y * (size)) + x + 3] = col->alpha;
 		}
 	}

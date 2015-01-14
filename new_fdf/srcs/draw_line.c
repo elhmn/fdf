@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 05:27:49 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 05:52:00 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 08:53:30 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 	if (dx > dy)
 	{
 		fun_choice = Ey - dx;
-		pixel_put_img(img, A.x, A.y, color, lay);
+		pixel_put_img(img, A.x, A.y, color, lay, fdf);
 		while (i < dx)
 		{
 			if (fun_choice < 0)
@@ -50,13 +50,13 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			}
 			A.x += incx;
 			i++;
-			pixel_put_img(img, A.x, A.y, color, lay);
+			pixel_put_img(img, A.x, A.y, color, lay, fdf);
 		}
 	}
 	else
 	{
 		fun_choice = Ex - dy;
-		pixel_put_img(img, A.x, A.y, color, lay);
+		pixel_put_img(img, A.x, A.y, color, lay, fdf);
 		while (i < dy)
 		{
 			if (fun_choice < 0)
@@ -68,7 +68,7 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			}
 			A.y += incy;
 			i++;
-			pixel_put_img(img, A.x, A.y, color, lay);
+			pixel_put_img(img, A.x, A.y, color, lay, fdf);
 		}
 	}
 }
