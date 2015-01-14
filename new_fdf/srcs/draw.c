@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 06:29:30 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 13:24:38 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,20 @@
 void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay)
 {
 	int		size;
-	int		i;
 
-	i = 0;
 	if (col && image)
 	{
 		size = lay.line;
-		while (i < 4 && !image[(y * (size)) + x + i])
-			i++;
-		print_type("i", &i, INT);
-		print_color(col);
-		if (i == 4 && size > 0 && x < WIDTH * (lay.bpp / 8))
+	//	print_type("i", &i, INT);
+	//	print_color(col);
+		x *= lay.bpp / 8;
+		if (size > 0 && (y < HEIGH && y >= 0) && (x >= 0 && x + lay.bpp / 8 < lay.line))
 		{
-			image[(y * (size)) + x + 0] = col->r;
+			print_type("y", &y, INT);
+			print_type("x", &x, INT);
+			image[(y * (size)) + x + 0] = col->b;
 			image[(y * (size)) + x + 1] = col->g;
-			image[(y * (size)) + x + 2] = col->b;
+			image[(y * (size)) + x + 2] = col->r;
 			image[(y * (size)) + x + 3] = col->alpha;
 		}
 	}

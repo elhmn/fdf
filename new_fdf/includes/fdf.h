@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 05:48:47 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 13:37:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define HEIGH 768
-# define WIDTH 1024
+# define HEIGH 768 * 2
+# define WIDTH 1024 * 2
 
 # define ESCAPE 65307
 
@@ -32,19 +32,19 @@
 ** definition des vecteurs de bases (o, i, j, k)
 */
 
-# define UNIT 20
+# define UNIT 30
 
-# define O_X WIDTH / 2
+# define O_X WIDTH / UNIT 
 # define O_Y HEIGH / 2
 
-# define I_X O_X + (UNIT * 5)
+# define I_X O_X + UNIT + 20
 # define I_Y O_Y
 
 # define J_X O_X
-# define J_Y O_Y - (UNIT / 2)
+# define J_Y O_Y - 2
 
-# define K_X O_X + UNIT
-# define K_Y O_Y + UNIT - 5
+# define K_X O_X + 10 
+# define K_Y O_Y + UNIT - 3
 
 typedef struct s_fdf	t_fdf;
 typedef unsigned int	t_uint;

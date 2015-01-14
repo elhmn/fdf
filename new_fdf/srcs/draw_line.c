@@ -6,11 +6,12 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 05:27:49 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 05:52:00 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 12:49:51 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <unistd.h>
 
 /*
 ** Algo incrementale algo de bresenham
@@ -51,6 +52,8 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			A.x += incx;
 			i++;
 			pixel_put_img(img, A.x, A.y, color, lay);
+			//usleep(1);
+		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
 		}
 	}
 	else
@@ -68,6 +71,8 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			}
 			A.y += incy;
 			i++;
+		//	usleep(1);
+		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
 			pixel_put_img(img, A.x, A.y, color, lay);
 		}
 	}
