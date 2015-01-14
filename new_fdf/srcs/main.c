@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:26:48 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 12:21:07 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 18:52:46 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		main(int ac, char **av)
 		mlx_loop_hook(fdf->mlx, loop_hook, fdf);
 //		mlx_expose_hook(fdf->win, expose_hook, fdf);
 		mlx_loop(fdf->mlx);
+//		dont forget to destroy fdf->tab
 		destroy_env(fdf);
 	}
 	else if (ac > 2)

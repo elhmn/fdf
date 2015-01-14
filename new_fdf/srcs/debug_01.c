@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 10:28:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 11:52:09 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/13 18:20:03 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ void		print_coord(t_coord **tab, int size)
 			ft_putnbr(tab[i][j].pt.y);
 			ft_putstr("], [");
 			ft_putnbr(tab[i][j].pt.z);
+			ft_putstr("]");
+			ft_putstr(" && ");
+			ft_putstr("[");
+			ft_putnbr(tab[i][j].pos.x);
+			ft_putstr("], [");
+			ft_putnbr(tab[i][j].pos.y);
 			ft_putstr("]");
 			if (tab[i][j + 1].end)
 				ft_putstr(" || ");
