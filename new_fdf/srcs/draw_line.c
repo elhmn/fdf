@@ -6,11 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 05:27:49 by bmbarga           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2015/01/14 12:49:51 by bmbarga          ###   ########.fr       */
-=======
-/*   Updated: 2015/01/14 08:53:30 by bmbarga          ###   ########.fr       */
->>>>>>> 9427e21b30509ca676c08fc912428744deae0b1b
+/*   Updated: 2015/01/14 13:43:22 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +39,7 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 	if (dx > dy)
 	{
 		fun_choice = Ey - dx;
-		pixel_put_img(img, A.x, A.y, color, lay, fdf);
+		pixel_put_img(img, A.x, A.y, color, lay);
 		while (i < dx)
 		{
 			if (fun_choice < 0)
@@ -55,19 +51,15 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			}
 			A.x += incx;
 			i++;
-<<<<<<< HEAD
 			pixel_put_img(img, A.x, A.y, color, lay);
 			//usleep(1);
 		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
-=======
-			pixel_put_img(img, A.x, A.y, color, lay, fdf);
->>>>>>> 9427e21b30509ca676c08fc912428744deae0b1b
 		}
 	}
 	else
 	{
 		fun_choice = Ex - dy;
-		pixel_put_img(img, A.x, A.y, color, lay, fdf);
+		pixel_put_img(img, A.x, A.y, color, lay);
 		while (i < dy)
 		{
 			if (fun_choice < 0)
@@ -79,13 +71,9 @@ void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay la
 			}
 			A.y += incy;
 			i++;
-<<<<<<< HEAD
 		//	usleep(1);
 		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
 			pixel_put_img(img, A.x, A.y, color, lay);
-=======
-			pixel_put_img(img, A.x, A.y, color, lay, fdf);
->>>>>>> 9427e21b30509ca676c08fc912428744deae0b1b
 		}
 	}
 }

@@ -6,11 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2015/01/14 13:24:38 by bmbarga          ###   ########.fr       */
-=======
-/*   Updated: 2015/01/14 09:17:29 by bmbarga          ###   ########.fr       */
->>>>>>> 9427e21b30509ca676c08fc912428744deae0b1b
+/*   Updated: 2015/01/14 13:43:20 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +14,10 @@
 #include "debug.h"
 #include "check_errors.h"
 
-void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay, t_fdf *fdf)
+void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay)
 {
 	int		size;
 
-<<<<<<< HEAD
 	if (col && image)
 	{
 		size = lay.line;
@@ -33,22 +28,6 @@ void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay, t_fdf *f
 		{
 			print_type("y", &y, INT);
 			print_type("x", &x, INT);
-=======
-	i = 0;
-	fdf = fdf; /****************/
-	if (col && image)
-	{
-		size = lay.line;
-		print_type("lay.line", &(lay.line), INT);
-		print_type("lay.endian", &(lay.endian), INT);
-		print_type("lay.bpp", &(lay.bpp), INT);
-		print_color(col);
-		while (i < 4 && !image[(y * (size)) + x + i])
-			i++;
-		if (i == 4 && size > 0 && x < WIDTH * (lay.bpp / 8))
-		{
-//			image[(y * (size)) + x] = mlx_get_color_value(fdf->mlx, col->color);
->>>>>>> 9427e21b30509ca676c08fc912428744deae0b1b
 			image[(y * (size)) + x + 0] = col->b;
 			image[(y * (size)) + x + 1] = col->g;
 			image[(y * (size)) + x + 2] = col->r;
