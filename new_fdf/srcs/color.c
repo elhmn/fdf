@@ -6,11 +6,12 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:33:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 19:54:12 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 03:54:23 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>/***************/
 
 void	set_color(t_color *col)
 {
@@ -69,5 +70,17 @@ void	low_light(t_color *color, unsigned int inc, int sign)
 				color->b = 0;
 		}
 		color->color = RGB_to_color(color->r, color->g, color->b);
+	}
+}
+
+void	print_color(t_color *color)
+{
+	if (color)
+	{
+		printf("color->col = [%d]\n", color->color);
+		printf("color->r = [%d]\n", color->r);
+		printf("color->g = [%d]\n", color->g);
+		printf("color->b = [%d]\n", color->b);
+		printf("color->a = [%d]\n", color->alpha);
 	}
 }

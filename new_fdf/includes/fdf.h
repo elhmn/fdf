@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 01:45:31 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 03:53:20 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@
 ** definition des vecteurs de bases (o, i, j, k)
 */
 
-# define UNIT 25
+# define UNIT 20
 
 # define O_X WIDTH / 2
 # define O_Y HEIGH / 2
 
-# define I_X O_X + UNIT
+# define I_X O_X + (UNIT * 5)
 # define I_Y O_Y
 
 # define J_X O_X
-# define J_Y O_Y + UNIT
+# define J_Y O_Y - (UNIT / 2)
 
-# define K_X O_X - UNIT
-# define K_Y O_Y - UNIT
+# define K_X O_X + UNIT
+# define K_Y O_Y + UNIT - 5
 
 typedef struct s_fdf	t_fdf;
 typedef unsigned int	t_uint;
@@ -73,13 +73,13 @@ struct				s_color
 };
 
 
-typedef struct		s_lay
+struct				s_lay
 {
 	void		*img;
-	t_uint		bpp;
-	t_uint		line;
-	t_uint		endian;
-	t_uint		depht;
+	int			bpp;
+	int			line;
+	int			endian;
+	int		depht;
 };
 
 
@@ -136,6 +136,7 @@ struct			s_fdf
 	t_base		base;
 	t_coord		**tab;
 	int			tab_h;
+	t_color		white;
 };
 
 /*
@@ -171,11 +172,11 @@ void			get_data(t_fdf *fdf, char *path);
 void			set_tab(char ***map, t_fdf *fdf);
 
 /*
-** draw_fdf.c
+** draw.c
 */
 
 void		draw_fdf(t_fdf *fdf);
-void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay *line);
+void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay);
 
 /*
 ** color.c
@@ -184,5 +185,6 @@ void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay *line);
 void	set_color(t_color *col);
 unsigned int	RGB_to_color(unsigned int r, unsigned int g, unsigned int b);
 void	low_light(t_color *color, unsigned int inc, int sign);
+void	print_color(t_color *color);
 
 #endif
