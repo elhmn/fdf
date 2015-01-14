@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 03:37:01 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 06:26:49 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,8 @@ void	init_env(t_fdf **fdf)
 	tmp->tab = NULL;
 	tmp->tab_h = 0;
 	tmp->bg = NULL;
+	tmp->white = NULL;
+	tmp->white = init_color(NULL, 0xFF00FF);
+	print_color(tmp->white);
 	init_base(&(tmp->base));
 }

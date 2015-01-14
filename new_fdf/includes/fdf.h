@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 03:53:20 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 05:48:47 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ struct			s_fdf
 	t_base		base;
 	t_coord		**tab;
 	int			tab_h;
-	t_color		white;
+	t_color		*white;
 };
 
 /*
@@ -182,9 +182,15 @@ void		pixel_put_img(char *image, int x, int y, t_color *col, t_lay lay);
 ** color.c
 */
 
-void	set_color(t_color *col);
-unsigned int	RGB_to_color(unsigned int r, unsigned int g, unsigned int b);
-void	low_light(t_color *color, unsigned int inc, int sign);
-void	print_color(t_color *color);
+void		set_color(t_color *col);
+t_uint		RGB_to_color(unsigned int r, unsigned int g, unsigned int b);
+void		low_light(t_color *color, unsigned int inc, int sign);
+void		print_color(t_color *color);
+t_color		*init_color(t_color	*color, unsigned int col);
 
+/*
+** draw_line.c
+*/
+
+void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay lay);
 #endif

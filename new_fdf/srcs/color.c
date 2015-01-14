@@ -6,12 +6,26 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:33:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 03:54:23 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/14 05:08:16 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "check_errors.h"
 #include <stdio.h>/***************/
+
+t_color	*init_color(t_color	*color, unsigned int col)
+{
+	if (!color)
+		if (!(color = (t_color*)malloc(sizeof(t_color))))
+			check_errors(MALLOC, "color", "color.c");
+	color->color = col;
+	color->r = (col & MASK_R) >> (8 * 2);
+	color->g = (col & MASK_G) >> 8;
+	color->b = (col & MASK_B);
+	color->alpha = 0;
+	return (color);
+}
 
 void	set_color(t_color *col)
 {
@@ -24,7 +38,7 @@ void	set_color(t_color *col)
 	}
 }
 
-unsigned int	RGB_to_color(unsigned int r, unsigned int g, unsigned int b)
+t_uint	RGB_to_color(unsigned int r, unsigned int g, unsigned int b)
 {
 	unsigned int color;
 
