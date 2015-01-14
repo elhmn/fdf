@@ -1,6 +1,7 @@
 #vim tmp
 *.*.swp
 *.*.swo
+*.*.swn
 
 #C Object
 *.o
