@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:26:48 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 08:21:17 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 12:21:07 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int				main(int ac, char **av)
 		print_type("fdf->rgt", &(fdf->rgt), INT); /**********/
 		print_type("fdf->up", &(fdf->up), INT); /**********/
 		print_type("fdf->dwn", &(fdf->dwn), INT); /**********/
+		print_type("fdf->heigh", &(fdf->heigh), INT); /**********/
+		print_type("fdf->width", &(fdf->width), INT); /**********/
 		mlx_loop(fdf->mlx);
 //		dont forget to destroy fdf->tab
 		destroy_env(fdf);

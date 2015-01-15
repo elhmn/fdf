@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 08:46:14 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 13:34:27 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
 # include "X.h"
 # include "libft.h"
 # include "get_next_line.h"
 
 # define UNIT 30
 
-# define MAX_HEIGH 1080
-# define MAX_WIDTH 1920
+# define ABS(x) (x < 0) ? x * -1 : x
+
+# define MAX_HEIGH 1152
+# define MAX_WIDTH 2048
 
 # define INC_H	200
 # define INC_W	200
@@ -33,17 +36,10 @@
 
 # define ESCAPE 65307
 
-# define O_X MAX_WIDTH / UNIT 
-# define O_Y MAX_HEIGH / 2
-
-/*
-** definition des vecteurs de bases (o, i, j, k)
-*/
-
 # define UNIT 30
 
-# define O_X MAX_WIDTH / UNIT 
-# define O_Y MAX_HEIGH / 2
+# define O_X 0//MAX_WIDTH / UNIT 
+# define O_Y 0//MAX_HEIGH / 2
 
 /*
 ** key_state
@@ -176,6 +172,10 @@ struct			s_fdf
 	int			heigh;
 	int			width;
 	int			unit;
+	int			i;
+	int			j;
+	int			k;
+	int			l;
 };
 
 /*

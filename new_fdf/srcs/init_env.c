@@ -6,12 +6,14 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 09:30:08 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 13:35:21 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "check_errors.h"
+#include "debug.h"
+#include <stdio.h>
 
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 {
@@ -24,6 +26,10 @@ void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 	base->j.pos.y = o_y - 2;
 	base->k.pos.x = o_x + 10;
 	base->k.pos.y = o_y + UNIT - 3;
+	fdf->i = 0;
+	fdf->j = 0;
+	fdf->k = 0;
+	fdf->l = 0;
 }
 
 static void		init_base(t_fdf *fdf, t_base *base)
@@ -52,17 +58,37 @@ void		init_mlx(t_fdf *fdf)
 	int		width;
 	int		o_x;
 	int		o_y;
+	double	tmp1;
+	double	tmp2;
 	
-	heigh = fdf->dwn - fdf->up + INC_H * 2;
-	width = fdf->rgt - fdf->lft + INC_W * 2;
-	if (heigh > MAX_HEIGH)
+	tmp1 = sqrt((pow(fdf->up, 2) - pow(fdf->dwn, 2)));
+//	printf("tmp1 = [%lf]", tmp1); /*****/
+	tmp2 = sqrt((pow(fdf->rgt, 2) - pow(fdf->lft, 2)));
+//	printf("tmp2 = [%lf]", tmp2);/*********/
+	heigh = (int)tmp1;
+	width = (int)tmp2;
+	print_type("heigh", &(heigh), INT); /**********/
+	print_type("width", &(width), INT); /**********/
+	if (heigh > (MAX_HEIGH - INC_H * 2))
+	{
+		ft_putendl("heigh > M_H - k * 2"); /**************/
 		heigh = MAX_HEIGH;
-	if (width > MAX_WIDTH)
+//		et redim;
+	}
+	else
+		heigh += (INC_H * 2);
+	if (width > (MAX_WIDTH - INC_W * 2))
+	{
+		ft_putendl("width > M_W - k * 2"); /**************/
 		width = MAX_WIDTH;
+//		et redim;
+	}
+	else
+		width += (INC_W * 2);
 	if (heigh > width && width < heigh / MOD)
-		width = heigh / MOD;
+		width = heigh / MOD + INC_W * 2;
 	if (width > heigh && heigh < width / MOD)
-			heigh = width / MOD;
+			heigh = width / MOD + INC_H * 2;
 	fdf->heigh = heigh;
 	fdf->width = width;
 	if (fdf)

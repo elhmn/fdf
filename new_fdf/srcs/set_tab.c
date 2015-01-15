@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:50:59 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 07:50:59 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 12:55:31 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,26 @@
 
 static void	get_limits(t_coord *e, t_fdf *fdf)
 {
-	if (e->pos.x < fdf->lft || fdf->lft < 0)
+	if (e->pos.x < fdf->lft || !fdf->i)
+	{
 		fdf->lft = e->pos.x;
-	if (e->pos.x > fdf->rgt || fdf->rgt < 0)
+		fdf->i = 1;
+	}
+	if (e->pos.x > fdf->rgt || !fdf->j)
+	{
 		fdf->rgt = e->pos.x;
-	if (e->pos.y > fdf->dwn || fdf->dwn < 0)
+		fdf->j = 1;
+	}
+	if (e->pos.y > fdf->dwn || !fdf->k)
+	{
 		fdf->dwn = e->pos.y;
-	if (e->pos.y < fdf->up || fdf->up < 0)
+		fdf->k = 1;
+	}
+	if (e->pos.y < fdf->up || !fdf->l)
+	{
 		fdf->up = e->pos.y;
+		fdf->l = 1;
+	}
 }
 
 static void	fill_coord(t_fdf *fdf, char *nbr, int i, int j)
