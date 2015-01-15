@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 13:35:21 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 16:02:11 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,40 @@
 #include "debug.h"
 #include <stdio.h>
 
+void			scale_base_moins(t_fdf *fdf, t_base *base, int k)
+{
+	base->o.pos.x /= k;
+	base->o.pos.y /= k;
+	base->i.pos.x /= k;
+	base->i.pos.y /= k;
+	base->j.pos.x /= k;
+	base->j.pos.y /= k;
+	base->k.pos.x /= k;
+	base->k.pos.y /= k;
+	fdf->i = 0;
+	fdf->j = 0;
+	fdf->k = 0;
+	fdf->l = 0;
+}
+
+void			scale_base_plus(t_fdf *fdf, t_base *base, int k)
+{
+	base->o.pos.x *= k;
+	base->o.pos.y *= k;
+	base->i.pos.x *= k;
+	base->i.pos.y *= k;
+	base->j.pos.x *= k;
+	base->j.pos.y *= k;
+	base->k.pos.x *= k;
+	base->k.pos.y *= k;
+	fdf->i = 0;
+	fdf->j = 0;
+	fdf->k = 0;
+	fdf->l = 0;
+}
+
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 {
-	fdf = fdf;
 	base->o.pos.x = o_x;
 	base->o.pos.y = o_y;
 	base->i.pos.x = o_x + UNIT + 20;
@@ -52,39 +83,80 @@ static void		init_base(t_fdf *fdf, t_base *base)
 	}
 }
 
-void		init_mlx(t_fdf *fdf)
+static int				distance(int a, int b)
+{
+	if (a <= 0 &&  b >= 0)
+	{
+	ft_putendl("6");
+		return (-a + b);
+	}
+	if (a >= 0 &&  b <= 0)
+	{
+	ft_putendl("5");
+		return (a + -b);
+	}
+	if (a <= 0 && b <= 0 && a <= b)
+	{
+	ft_putendl("4");
+		return (-a - -b);
+	}
+	if (a <= 0 && b <= 0 && b <= a)
+	{
+	ft_putendl("3");
+		return (-b - -a);
+	}
+	if (a >= 0 && b >= 0 && b <= a)
+	{
+	ft_putendl("2");
+		return (a - b);
+	}
+	if (a >= 0 && b >= 0 && a <= b)
+	{
+	ft_putendl("1");
+		return (b - a);
+	}
+	ft_putendl("0");
+	return (0);
+}
+
+void			init_mlx(t_fdf *fdf)
 {
 	int		heigh;
 	int		width;
 	int		o_x;
 	int		o_y;
-	double	tmp1;
-	double	tmp2;
 	
-	tmp1 = sqrt((pow(fdf->up, 2) - pow(fdf->dwn, 2)));
-//	printf("tmp1 = [%lf]", tmp1); /*****/
-	tmp2 = sqrt((pow(fdf->rgt, 2) - pow(fdf->lft, 2)));
-//	printf("tmp2 = [%lf]", tmp2);/*********/
-	heigh = (int)tmp1;
-	width = (int)tmp2;
+	heigh = distance(fdf->dwn, fdf->up);
+	width = distance(fdf->rgt, fdf->lft);
 	print_type("heigh", &(heigh), INT); /**********/
 	print_type("width", &(width), INT); /**********/
 	if (heigh > (MAX_HEIGH - INC_H * 2))
 	{
-		ft_putendl("heigh > M_H - k * 2"); /**************/
-		heigh = MAX_HEIGH;
+	//	while (heigh > (MAX_HEIGH - INC_H * 2))
+	//	{
+			ft_putendl("heigh > M_H - k * 2"); /**************/
+			scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
+			update_tab(fdf);
+			heigh = MAX_HEIGH;
 //		et redim;
+	//	}
 	}
 	else
 		heigh += (INC_H * 2);
 	if (width > (MAX_WIDTH - INC_W * 2))
 	{
+//	while (width > (MAX_WIDTH - INC_W * 2))
+//	{	
 		ft_putendl("width > M_W - k * 2"); /**************/
+		scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
+		update_tab(fdf);
 		width = MAX_WIDTH;
 //		et redim;
+//	}
 	}
 	else
 		width += (INC_W * 2);
+	/********** ATTENTION BUG POSSIBLE ******/
 	if (heigh > width && width < heigh / MOD)
 		width = heigh / MOD + INC_W * 2;
 	if (width > heigh && heigh < width / MOD)

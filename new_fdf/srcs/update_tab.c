@@ -6,11 +6,12 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 08:12:36 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 08:47:17 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 13:57:58 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
 
 void	update_coord(t_fdf *fdf, t_coord *e)
 {

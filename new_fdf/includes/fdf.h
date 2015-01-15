@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 13:34:27 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 16:02:36 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define UNIT 30
 
-# define ABS(x) (x < 0) ? x * -1 : x
+# define ABS(x) (x < 0) ? -x : x
 
 # define MAX_HEIGH 1152
 # define MAX_WIDTH 2048
@@ -33,6 +33,9 @@
 # define INC_H	200
 # define INC_W	200
 # define MOD	2
+
+# define OBJ_H MAX_HEIGH - INC_H * 2
+# define OBJ_W MAX_WIDTH - INC_W * 2
 
 # define ESCAPE 65307
 
@@ -183,8 +186,10 @@ struct			s_fdf
 */
 
 void			init_env(t_fdf **fdf);
-void			init_mlx(t_fdf *fdf);
+void				init_mlx(t_fdf *fdf);
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
+void			scale_base_plus(t_fdf *fdf, t_base *base, int k);
+void			scale_base_moins(t_fdf *fdf, t_base *base, int k);
 
 /*
 ** destroy_env.c
