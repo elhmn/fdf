@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 06:51:16 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 08:46:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,19 @@
 # include "libft.h"
 # include "get_next_line.h"
 
-# define HEIGH 1080
-# define WIDTH 1920
+# define UNIT 30
+
+# define MAX_HEIGH 1080
+# define MAX_WIDTH 1920
+
+# define INC_H	200
+# define INC_W	200
+# define MOD	2
 
 # define ESCAPE 65307
 
+# define O_X MAX_WIDTH / UNIT 
+# define O_Y MAX_HEIGH / 2
 
 /*
 ** definition des vecteurs de bases (o, i, j, k)
@@ -34,17 +42,8 @@
 
 # define UNIT 30
 
-# define O_X WIDTH / UNIT 
-# define O_Y HEIGH / 2
-
-# define I_X O_X + UNIT + 20
-# define I_Y O_Y
-
-# define J_X O_X
-# define J_Y O_Y - 2
-
-# define K_X O_X + 10 
-# define K_Y O_Y + UNIT - 3
+# define O_X MAX_WIDTH / UNIT 
+# define O_Y MAX_HEIGH / 2
 
 /*
 ** key_state
@@ -174,6 +173,9 @@ struct			s_fdf
 	int			tab_w;
 	t_color		*white;
 	int			key_state;
+	int			heigh;
+	int			width;
+	int			unit;
 };
 
 /*
@@ -181,6 +183,8 @@ struct			s_fdf
 */
 
 void			init_env(t_fdf **fdf);
+void			init_mlx(t_fdf *fdf);
+void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
 
 /*
 ** destroy_env.c
@@ -208,6 +212,13 @@ void			get_data(t_fdf *fdf, char *path);
 */
 
 void			set_tab(char ***map, t_fdf *fdf);
+
+/*
+** update_tab.c
+*/
+
+void			update_tab(t_fdf *fdf);
+void			update_coord(t_fdf *fdf, t_coord *e);
 
 /*
 ** draw.c

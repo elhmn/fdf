@@ -6,13 +6,25 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:50:59 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 05:35:39 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 07:50:59 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "check_errors.h"
 #include "debug.h"
+
+static void	get_limits(t_coord *e, t_fdf *fdf)
+{
+	if (e->pos.x < fdf->lft || fdf->lft < 0)
+		fdf->lft = e->pos.x;
+	if (e->pos.x > fdf->rgt || fdf->rgt < 0)
+		fdf->rgt = e->pos.x;
+	if (e->pos.y > fdf->dwn || fdf->dwn < 0)
+		fdf->dwn = e->pos.y;
+	if (e->pos.y < fdf->up || fdf->up < 0)
+		fdf->up = e->pos.y;
+}
 
 static void	fill_coord(t_fdf *fdf, char *nbr, int i, int j)
 {
@@ -29,6 +41,7 @@ static void	fill_coord(t_fdf *fdf, char *nbr, int i, int j)
 		+ e->pt.z * fdf->base.k.pos.x + fdf->base.o.pos.x * alph;
 	e->pos.y = e->pt.x * fdf->base.i.pos.y + e->pt.y * fdf->base.j.pos.y
 		+ e->pt.z * fdf->base.k.pos.y + fdf->base.o.pos.y * alph;
+	get_limits(e, fdf);
 }
 
 static int	line_size(char **map)

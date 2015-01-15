@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 07:05:12 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 08:05:16 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		pixel_put_img(t_fdf *fdf, int x, int y, t_color *col)
 		size = lay.line;
 		b = lay.bpp / 8;
 		x *= b;
-		if (size > 0 && (y < HEIGH && y >= 0) && (x >= 0 && x + lay.bpp / 8 < lay.line))
+		if (size > 0 && (y < fdf->heigh && y >= 0) && (x >= 0 && x + lay.bpp / 8 < lay.line))
 		{
 			image[(y * (size)) + x + 0] = col->b;
 			image[(y * (size)) + x + 1] = col->g;
@@ -73,7 +73,7 @@ void		draw_fdf(t_fdf *fdf)
 {
 	if (fdf->bg)
 		mlx_destroy_image(fdf->mlx, fdf->bg);
-	if (!(fdf->bg = mlx_new_image(fdf->mlx, WIDTH, HEIGH)))
+	if (!(fdf->bg = mlx_new_image(fdf->mlx, fdf->width, fdf->heigh)))
 		check_errors(MALLOC, "fdf->bg", "draw.c");
 	fdf->img = mlx_get_data_addr(fdf->bg, &(fdf->lay->bpp), &(fdf->lay->line), &(fdf->lay->endian));
 	if (!fdf->img)
