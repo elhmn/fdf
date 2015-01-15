@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:50:59 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 02:22:20 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 05:35:39 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void		set_tab(char ***map, t_fdf *fdf)
 		}
 		while (*(map + ++i))
 		{
-			len = line_size(*(map + i));
+			if ((len = line_size(*(map + i))) > fdf->tab_w)
+				fdf->tab_w = len;
 			*(fdf->tab + i) = (t_coord*)malloc(sizeof(t_coord) * (len + 1));
 			if (!(fdf->tab + i))
 				check_errors(MALLOC, "fdf->tab + i", "set_tab.c");

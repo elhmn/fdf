@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:42:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 13:02:43 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 06:57:58 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void		get_data(t_fdf *fdf, char *path)
 	map = get_map(fd, fdf);
 	print_tab(map);
 	set_tab(map, fdf);
-	print_coord(fdf->tab, fdf->tab_h);
+//	print_coord(fdf->tab, fdf->tab_h); /*******/
 	if (close(fd) == -1)
 		sys_errors("fd");
 }

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 14:15:47 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 05:31:36 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ void	init_env(t_fdf **fdf)
 		if (!(*fdf = (t_fdf*)malloc(sizeof(t_fdf))))
 			check_errors(MALLOC, "main.c", "fdf");
 	tmp = *fdf;
-	if (!(tmp->mlx = mlx_init()))
-		check_errors(MALLOC, "init_env.c", "tmp->mlx");
-	if (!(tmp->win = mlx_new_window(tmp->mlx, WIDTH, HEIGH, "tmp")))
-		check_errors(MALLOC, "init_env.c", "tmp->win");
 	tmp->refresh = 1;
 	tmp->tab = NULL;
 	tmp->tab_h = 0;
+	tmp->tab_w = 0;
 	tmp->bg = NULL;
 	tmp->white = NULL;
-	tmp->white = init_color(NULL, 0xFFAAEE);
-	print_color(tmp->white);
+	tmp->img = NULL;
+	if (!(tmp->lay = (t_lay*)malloc(sizeof(t_lay))))
+			check_errors(MALLOC, "tmp->lay", "init_env.c");
+	tmp->white = init_color(NULL, WHITE);
+	print_color(tmp->white); /************/
 	init_base(&(tmp->base));
 }

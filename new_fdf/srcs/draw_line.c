@@ -6,74 +6,85 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 05:27:49 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 13:43:22 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 04:13:10 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <unistd.h>
+#include "check_errors.h"
 
 /*
 ** Algo incrementale algo de bresenham
 */
 
-void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color, char *img, t_lay lay)
+static t_draw	*init_d(t_draw *d, t_pos A, t_pos B, t_color *col)
+{
+	if (!d)
+		if (!(d = (t_draw*)malloc(sizeof(t_draw))))
+			check_errors(MALLOC, "draw_line.c", "d");
+	d->dx = abs(B.x - A.x);
+	d->dy = abs(B.y - A.y);
+	d->incx = (B.x < A.x) ? -1 : 1;
+	d->incy = (B.y < A.y) ? -1 : 1;
+	d->Ex = 2 * d->dx;
+	d->Ey = 2 * d->dy;
+	d->color = col;
+	return (d);
+}
+
+static void		draw_1(t_fdf *fdf, t_pos A, t_draw *d)
 {
 	int		fun_choice;
-	int		Ex;
-	int		Ey;
 	int		i;
-	int		incx;
-	int		incy;
-	int		dx;
-	int		dy;
 
-	fdf = fdf; /******* TO CHANGE ********/
-	dx = abs(B.x - A.x);
-	dy = abs(B.y - A.y);
-	incx = (B.x < A.x) ? -1 : 1;
-	incy = (B.y < A.y) ? -1 : 1;
-	Ex = 2 * dx;
-	Ey = 2 * dy;
 	i = 0;
-	if (dx > dy)
+	fun_choice = d->Ey - d->dx;
+	pixel_put_img(fdf, A.x, A.y, d->color);
+	while (i < d->dx)
 	{
-		fun_choice = Ey - dx;
-		pixel_put_img(img, A.x, A.y, color, lay);
-		while (i < dx)
+		if (fun_choice < 0)
+			fun_choice += d->Ey;
+		else
 		{
-			if (fun_choice < 0)
-				fun_choice += Ey;
-			else
-			{
-				fun_choice += Ey - Ex;
-				A.y += incy;
-			}
-			A.x += incx;
-			i++;
-			pixel_put_img(img, A.x, A.y, color, lay);
-			//usleep(1);
-		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
+			fun_choice += d->Ey - d->Ex;
+			A.y += d->incy;
 		}
+		A.x += d->incx;
+		i++;
+		pixel_put_img(fdf, A.x, A.y, d->color);
 	}
+}
+
+static void		draw_2(t_fdf *fdf, t_pos A, t_draw *d)
+{
+	int		fun_choice;
+	int		i;
+
+	i = 0;
+	fun_choice = d->Ex - d->dy;
+	pixel_put_img(fdf, A.x, A.y, d->color);
+	while (i < d->dy)
+	{
+		if (fun_choice < 0)
+			fun_choice += d->Ex;
+		else
+		{
+			fun_choice += d->Ex - d->Ey;
+			A.x += d->incx;
+		}
+		A.y += d->incy;
+		i++;
+		pixel_put_img(fdf, A.x, A.y, d->color);
+	}
+}
+
+void			draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color)
+{
+	t_draw 	*d;	
+
+	d = init_d(NULL, A, B, color);
+	if (d->dx > d->dy)
+		draw_1(fdf, A, d);
 	else
-	{
-		fun_choice = Ex - dy;
-		pixel_put_img(img, A.x, A.y, color, lay);
-		while (i < dy)
-		{
-			if (fun_choice < 0)
-				fun_choice += Ex;
-			else
-			{
-				fun_choice += Ex - Ey;
-				A.x += incx;
-			}
-			A.y += incy;
-			i++;
-		//	usleep(1);
-		//	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
-			pixel_put_img(img, A.x, A.y, color, lay);
-		}
-	}
+		draw_2(fdf, A, d);
 }

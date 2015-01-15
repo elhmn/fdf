@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/14 13:43:27 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/15 05:27:23 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ int		keyPress_hook(int key, void *param)
 	return (0);
 }
 
+int		expose_hook(void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf*)param;
+	if (fdf->bg)
+	{
+		mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->bg, 0, 0);
+		fdf->refresh = 1;
+	}
+	else
+	{
+		draw_fdf(fdf);
+		fdf->refresh = 0;
+	}
+	return (0);
+}
+
 int		loop_hook(void *param)
 {
 	t_fdf	*fdf;
@@ -47,11 +65,6 @@ int		loop_hook(void *param)
 	if (fdf->refresh)
 	{
 		draw_fdf(fdf);
-//		placer les points
-//		tracer
-//		ft_putendl("je suis con"); /*****************/
-//		clear image
-//		put image on window
 		fdf->refresh = 0;
 	}
 	return (0);
