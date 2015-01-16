@@ -48,6 +48,48 @@ static	int	w_tab(t_coord *tab)
 	return (w);
 }
 
+int			altitude(int alt)
+{
+	if (alt >= 0 && alt < 5)
+		return (DWN);
+	if (alt >= 0 && alt < 10)
+		return (MIDWN);
+	if (alt >= 10 && alt < 15)
+		return (MIUP);
+	if (alt >= 15 && alt < 20)
+		return (UP);
+	if (alt > 20)
+		return (UPPER);
+	return (0);
+}
+
+void		choose_color(t_fdf *fdf, t_coord **tab, int i, int j)
+{
+	int		alt;
+
+	alt = altitude(tab[i][j].pt.y);
+	if (alt == DWN)
+	{
+		fdf->white = init_color(NULL, DWN);
+	}
+	else if (alt == MIDWN)
+	{
+		fdf->white = init_color(NULL, MIDWN);
+	}
+	else if (alt == MIUP)
+	{
+		fdf->white = init_color(NULL, MIUP);
+	}
+	else if (alt == UP)
+	{
+		fdf->white = init_color(NULL, UP);
+	}
+	else if (alt == UPPER)
+	{
+		fdf->white = init_color(NULL, UPPER);
+	}
+}
+
 static void	join_points(t_fdf *fdf)
 {
 	t_coord **tab;
@@ -62,9 +104,15 @@ static void	join_points(t_fdf *fdf)
 		while (tab[i][++j].end)
 		{
 			if (i + 1 < fdf->tab_h && j < w_tab(tab[i + 1]))
+			{
+				choose_color(fdf, tab, i + 1, j);
 				draw_line(fdf, tab[i][j].pos, tab[i + 1][j].pos, fdf->white);
+			}
 			if (tab[i][j + 1].end)
+			{
+				choose_color(fdf, tab, i, j + 1);
 				draw_line(fdf, tab[i][j].pos, tab[i][j + 1].pos, fdf->white);
+			}
 		}
 	}
 }

@@ -85,6 +85,15 @@ typedef struct s_draw	t_draw;
 
 # define	WHITE		0xFFFFFF
 
+enum				e_col
+{
+	DWN = 0x7F37FF,
+	MIDWN = 0xA532E8,
+	MIUP = 0xED43FF,
+	UP = 0xE832AC,
+	UPPER = 0xFF3759
+};
+
 struct				s_color
 {
 	unsigned int	alpha;
