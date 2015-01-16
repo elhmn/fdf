@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/16 12:59:21 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 00:08:25 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,59 @@ int			altitude(int alt)
 	return (0);
 }
 
-void		choose_color(t_fdf *fdf, t_coord **tab, int i, int j)
+void		choose_color1(t_fdf *fdf, t_coord **tab, int i, int j)
 {
-	int		alt;
+	int		alt1;
+	int		alt2;
 
-	alt = altitude(tab[i][j].pt.y);
-	if (alt == DWN)
+	alt1 = altitude(tab[i + 1][j].pt.y);
+	alt2 = altitude(tab[i][j].pt.y);
+	if (alt1 == DWN || alt2 == DWN)
 	{
 		fdf->white = init_color(NULL, DWN);
 	}
-	else if (alt == MIDWN)
+	else if (alt1 == MIDWN || alt2 == MIDWN)
 	{
 		fdf->white = init_color(NULL, MIDWN);
 	}
-	else if (alt == MIUP)
+	else if (alt1 == MIUP || alt2 == MIUP)
 	{
 		fdf->white = init_color(NULL, MIUP);
 	}
-	else if (alt == UP)
+	else if (alt1 == UP || alt2 == UP)
 	{
 		fdf->white = init_color(NULL, UP);
 	}
-	else if (alt == UPPER)
+	else if (alt1 == UPPER || alt2 == UPPER)
+	{
+		fdf->white = init_color(NULL, UPPER);
+	}
+}
+
+void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j)
+{
+	int		alt1;
+	int		alt2;
+
+	alt1 = altitude(tab[i][j].pt.y);
+	alt2 = altitude(tab[i][j + 1].pt.y);
+	if (alt1 == DWN || alt2 == DWN)
+	{
+		fdf->white = init_color(NULL, DWN);
+	}
+	else if (alt1 == MIDWN || alt2 == MIDWN)
+	{
+		fdf->white = init_color(NULL, MIDWN);
+	}
+	else if (alt1 == MIUP || alt2 == MIUP)
+	{
+		fdf->white = init_color(NULL, MIUP);
+	}
+	else if (alt1 == UP || alt2 == UP)
+	{
+		fdf->white = init_color(NULL, UP);
+	}
+	else if (alt1 == UPPER || alt2 == UPPER)
 	{
 		fdf->white = init_color(NULL, UPPER);
 	}
@@ -105,12 +136,12 @@ static void	join_points(t_fdf *fdf)
 		{
 			if (i + 1 < fdf->tab_h && j < w_tab(tab[i + 1]))
 			{
-				choose_color(fdf, tab, i + 1, j);
+				choose_color1(fdf, tab, i, j);
 				draw_line(fdf, tab[i][j].pos, tab[i + 1][j].pos, fdf->white);
 			}
 			if (tab[i][j + 1].end)
 			{
-				choose_color(fdf, tab, i, j + 1);
+				choose_color2(fdf, tab, i, j);
 				draw_line(fdf, tab[i][j].pos, tab[i][j + 1].pos, fdf->white);
 			}
 		}
