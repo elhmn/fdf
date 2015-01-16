@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 16:02:11 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/16 16:17:28 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,74 +15,7 @@
 #include "debug.h"
 #include <stdio.h>
 
-void			print_base(t_base *base)
-{
-	print_type("o.x", &(base->o.pos.x), INT);
-	print_type("o.y", &(base->o.pos.y), INT);
-	ft_putendl("");
-	print_type("i.x", &(base->i.pos.x), INT);
-	print_type("i.y", &(base->i.pos.y), INT);
-	ft_putendl("");
-	print_type("j.x", &(base->j.pos.x), INT);
-	print_type("j.y", &(base->j.pos.y), INT);
-	ft_putendl("");
-	print_type("k.x", &(base->k.pos.x), INT);
-	print_type("k.y", &(base->k.pos.y), INT);
-	ft_putendl("");
-}
 
-void			scale_base_moins(t_fdf *fdf, t_base *base, int k)
-{
-	t_pos	i;
-	t_pos	j;
-	t_pos	l;
-
-	i.x = k >= base->i.pos.x ? base->i.pos.x : k;
-	i.y = k >= base->i.pos.y ? base->i.pos.y : k;
-	j.x = k >= base->j.pos.x ? base->j.pos.x : k;
-	j.y = k >= base->j.pos.y ? base->j.pos.y : k;
-	l.x = k >= base->k.pos.x ? base->k.pos.x : k;
-	l.y = k >= base->k.pos.y ? base->k.pos.y : k;
-	base->i.pos.x /= !i.x ? 1 : i.x;
-	base->i.pos.y /= !i.y ? 1 : i.y;
-	base->j.pos.x /= !j.x ? 1 : j.x;
-	base->j.pos.y /= !j.y ? 1 : j.y;
-	base->k.pos.x /= !l.x ? 1 : l.x;
-	base->k.pos.y /= !l.y ? 1 : l.y;
-	fdf->i = 0;
-	fdf->j = 0;
-	fdf->k = 0;
-	fdf->l = 0;
-}
-
-void			scale_base_plus(t_fdf *fdf, t_base *base, int k)
-{
-	base->o.pos.x *= k;
-	base->o.pos.y *= k;
-	base->i.pos.x *= k;
-	base->i.pos.y *= k;
-	base->j.pos.x *= k;
-	base->j.pos.y *= k;
-	base->k.pos.x *= k;
-	base->k.pos.y *= k;
-	fdf->i = 0;
-	fdf->j = 0;
-	fdf->k = 0;
-	fdf->l = 0;
-}
-
-void			move_center(t_fdf *fdf, t_base *base, int o_x, int o_y)
-{
-	fdf = fdf;
-	base->o.pos.x += o_x;
-	base->o.pos.y += o_y;
-	base->i.pos.x += o_x;
-	base->i.pos.y += o_y;
-	base->j.pos.x += o_x;
-	base->j.pos.y += o_y; 
-	base->k.pos.x += o_x;
-	base->k.pos.y += o_y;
-}
 
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 {
@@ -120,39 +53,20 @@ static void		init_base(t_fdf *fdf, t_base *base)
 	}
 }
 
-static int				distance(int a, int b)
+int				distance(int a, int b)
 {
 	if (a <= 0 &&  b >= 0)
-	{
-	ft_putendl("6");
 		return (-a + b);
-	}
 	if (a >= 0 &&  b <= 0)
-	{
-	ft_putendl("5");
 		return (a + -b);
-	}
 	if (a <= 0 && b <= 0 && a <= b)
-	{
-	ft_putendl("4");
 		return (-a - -b);
-	}
 	if (a <= 0 && b <= 0 && b <= a)
-	{
-	ft_putendl("3");
 		return (-b - -a);
-	}
 	if (a >= 0 && b >= 0 && b <= a)
-	{
-	ft_putendl("2");
 		return (a - b);
-	}
 	if (a >= 0 && b >= 0 && a <= b)
-	{
-	ft_putendl("1");
 		return (b - a);
-	}
-	ft_putendl("0");
 	return (0);
 }
 
@@ -164,41 +78,45 @@ void			init_mlx(t_fdf *fdf)
 	int		o_y;
 	int		a;
 	
+	print_type("fdf->lft", &(fdf->lft), INT); /**********/
+	print_type("fdf->rgt", &(fdf->rgt), INT); /**********/
+	print_type("fdf->up", &(fdf->up), INT); /**********/
+	print_type("fdf->dwn", &(fdf->dwn), INT); /**********/
 	heigh = distance(fdf->dwn, fdf->up);
 	width = distance(fdf->rgt, fdf->lft);
+	a = 0;
 	print_type("heigh", &(heigh), INT); /**********/
 	print_type("width", &(width), INT); /**********/
 	if (heigh > (MAX_HEIGH - INC_H * 2))
 	{
-	//	while (heigh > (MAX_HEIGH - INC_H * 2))
-	//	{
-			ft_putendl("heigh > M_H - k * 2"); /**************/
-		ft_putendl("before");
-			print_base(&(fdf->base));
-			a = (int)((int)heigh / (int)(OBJ_H));
-			scale_base_moins(fdf, &(fdf->base), a);
-	//		a = (int)OBJ_H;
-	//		printf("heigh = [%d]\n", );
-			ft_putendl("after");
-			print_base(&(fdf->base));
-			update_tab(fdf);
-			heigh = MAX_HEIGH;
-//			print_coord(fdf->tab, fdf->tab_h);
-//		et redim;
+		ft_putendl("heigh > M_H - k * 2"); /**************/
+		ft_putendl("before"); /********/
+		print_base(&(fdf->base));
+		a = (int)((int)heigh / (int)(OBJ_H));
+		scale_base_moins(fdf, &(fdf->base), a);
+		ft_putendl("after");/***********/
+		print_base(&(fdf->base)); /**********/
+		update_tab(fdf);
+		heigh = MAX_HEIGH;
+//		print_coord(fdf->tab, fdf->tab_h);
 	//	}
 	}
 	else
 		heigh += (INC_H * 2);
-	
 	if (width > (MAX_WIDTH - INC_W * 2))
 	{
-//	while (width > (MAX_WIDTH - INC_W * 2))
-//	{	
-		ft_putendl("width > M_W - k * 2"); /**************/
-	//	scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
-	//	update_tab(fdf);
+		if (!a)
+		{
+			ft_putendl("width > M_W - k * 2"); /**************/
+			ft_putendl("before");/********/
+			print_base(&(fdf->base));
+			a = (int)((int)width / (int)(OBJ_W));
+			scale_base_moins(fdf, &(fdf->base), a);
+			ft_putendl("after");/***********/
+			print_base(&(fdf->base)); /**********/
+			update_tab(fdf);
+		}
 		width = MAX_WIDTH;
-//		et redim;
 //	}
 	}
 	else
@@ -217,8 +135,12 @@ void			init_mlx(t_fdf *fdf)
 		if (!(fdf->win = mlx_new_window(fdf->mlx, width, heigh, "tmp")))
 			check_errors(MALLOC, "init_env.c", "fdf->win");
 	}
-	o_x = width / 2 - distance(fdf->rgt, fdf->lft) / 2;
-	o_y = heigh / 2 - distance(fdf->dwn, fdf->up) / 2;
+	print_type("fdf->lft", &(fdf->lft), INT); /**********/
+	print_type("fdf->rgt", &(fdf->rgt), INT); /**********/
+	print_type("fdf->up", &(fdf->up), INT); /**********/
+	print_type("fdf->dwn", &(fdf->dwn), INT); /**********/
+	o_y = distance(fdf->dwn, fdf->up) / 2 < heigh / 2 ? heigh / 2 - distance(fdf->dwn, fdf->up) / 2 : 0;
+	o_x = ((distance(fdf->lft, fdf->rgt) / 2 < width / 2) && o_y) ? width / 2 - distance(fdf->rgt, fdf->lft) / 2 : 0;
 	move_center(fdf, &(fdf->base), o_x, o_y);
 	print_base(&(fdf->base));
 }

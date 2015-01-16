@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 16:02:36 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/16 15:35:32 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 # define ABS(x) (x < 0) ? -x : x
 
-# define HOME
-//# define FT
+//# define HOME
+# define FT
 
 # ifdef FT
 
@@ -55,8 +55,8 @@
 
 # define UNIT 30
 
-# define O_X 0//MAX_WIDTH / UNIT 
-# define O_Y 0//MAX_HEIGH / 2
+# define O_X 0 
+# define O_Y 0
 
 /*
 ** key_state
@@ -200,10 +200,9 @@ struct			s_fdf
 */
 
 void			init_env(t_fdf **fdf);
-void				init_mlx(t_fdf *fdf);
+void			init_mlx(t_fdf *fdf);
+int				distance(int a, int b);
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
-void			scale_base_plus(t_fdf *fdf, t_base *base, int k);
-void			scale_base_moins(t_fdf *fdf, t_base *base, int k);
 
 /*
 ** destroy_env.c
@@ -261,5 +260,13 @@ t_color		*init_color(t_color	*color, unsigned int col);
 ** draw_line.c
 */
 
-void	draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color);
+void		draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color);
+
+/*
+** math_ope_01.c
+*/
+
+void		scale_base_moins(t_fdf *fdf, t_base *base, int k);
+void		scale_base_plus(t_fdf *fdf, t_base *base, int k);
+void		move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
 #endif

@@ -6,12 +6,28 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 10:28:40 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 04:48:03 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/16 15:29:16 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "debug.h"
+
+void			print_base(t_base *base)
+{
+	print_type("o.x", &(base->o.pos.x), INT);
+	print_type("o.y", &(base->o.pos.y), INT);
+	ft_putendl("");
+	print_type("i.x", &(base->i.pos.x), INT);
+	print_type("i.y", &(base->i.pos.y), INT);
+	ft_putendl("");
+	print_type("j.x", &(base->j.pos.x), INT);
+	print_type("j.y", &(base->j.pos.y), INT);
+	ft_putendl("");
+	print_type("k.x", &(base->k.pos.x), INT);
+	print_type("k.y", &(base->k.pos.y), INT);
+	ft_putendl("");
+}
 
 void		print_type(char *str, void *elem, int type)
 {

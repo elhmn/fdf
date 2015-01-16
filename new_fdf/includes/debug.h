@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 10:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 11:28:45 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/16 15:29:21 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void		print_type(char *str, void *elem, int type);
 void		print_map(char **map);
 void		print_tab(char ***tab);
 void		print_coord(t_coord **tab, int size);
+void		print_base(t_base *base);
 
 #endif
