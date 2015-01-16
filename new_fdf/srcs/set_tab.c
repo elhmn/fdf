@@ -14,7 +14,7 @@
 #include "check_errors.h"
 #include "debug.h"
 
-static void	get_limits(t_coord *e, t_fdf *fdf)
+void	get_limits(t_coord *e, t_fdf *fdf)
 {
 	if (e->pos.x < fdf->lft || !fdf->i)
 	{

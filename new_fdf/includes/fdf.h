@@ -27,15 +27,29 @@
 
 # define ABS(x) (x < 0) ? -x : x
 
-# define MAX_HEIGH 1152
-# define MAX_WIDTH 2048
+# define HOME
+//# define FT
+
+# ifdef FT
+
+#  define MAX_HEIGH 1080
+#  define MAX_WIDTH 1920
+
+#endif
+
+# ifdef HOME
+
+# define MAX_HEIGH 2160
+# define MAX_WIDTH 3840
+
+#endif
 
 # define INC_H	200
 # define INC_W	200
 # define MOD	2
 
-# define OBJ_H MAX_HEIGH - INC_H * 2
-# define OBJ_W MAX_WIDTH - INC_W * 2
+# define OBJ_H MAX_HEIGH - (INC_H * 2)
+# define OBJ_W MAX_WIDTH - (INC_W * 2)
 
 # define ESCAPE 65307
 
@@ -217,6 +231,7 @@ void			get_data(t_fdf *fdf, char *path);
 */
 
 void			set_tab(char ***map, t_fdf *fdf);
+void	get_limits(t_coord *e, t_fdf *fdf);
 
 /*
 ** update_tab.c

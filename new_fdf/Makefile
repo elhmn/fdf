@@ -25,6 +25,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I ./includes/ -I /usr/X11/include/X11
+INCHOME = -I ./includes/ -I /usr/include/X11
 
 LIB42 = -L./libft -lft -L /usr/X11/lib -lmlx -lX11 -lXext
 LIB = -L./libft -lft -L /usr/lib64/X11 -lm -lmlx -lX11 -lXext
@@ -35,9 +36,9 @@ $(NAME): $(SRCS)
 	make -C libft
 	$(CC) $(FLAGS) -o $(NAME) $(INCLUDES) $(SRCS) $(LIB42)
 
-42: $(SRCS)
+home: $(SRCS)
 	make -C libft
-	$(CC) $(FLAGS) $(INCLUDES) $(SRCS) $(LIB42)
+	$(CC) $(FLAGS) -o $(NAME) $(INCHOME) $(SRCS) $(LIB)
 
 clean:
 	make -C libft clean

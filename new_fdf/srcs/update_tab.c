@@ -37,6 +37,9 @@ void	update_tab(t_fdf *fdf)
 	{
 		j = -1;
 		while (tab[i][++j].end)
+		{
 			update_coord(fdf, tab[i] + j);
+			get_limits(tab[i] + j, fdf);
+		}
 	}
 }

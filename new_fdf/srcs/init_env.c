@@ -15,16 +15,40 @@
 #include "debug.h"
 #include <stdio.h>
 
+void			print_base(t_base *base)
+{
+	print_type("o.x", &(base->o.pos.x), INT);
+	print_type("o.y", &(base->o.pos.y), INT);
+	ft_putendl("");
+	print_type("i.x", &(base->i.pos.x), INT);
+	print_type("i.y", &(base->i.pos.y), INT);
+	ft_putendl("");
+	print_type("j.x", &(base->j.pos.x), INT);
+	print_type("j.y", &(base->j.pos.y), INT);
+	ft_putendl("");
+	print_type("k.x", &(base->k.pos.x), INT);
+	print_type("k.y", &(base->k.pos.y), INT);
+	ft_putendl("");
+}
+
 void			scale_base_moins(t_fdf *fdf, t_base *base, int k)
 {
-	base->o.pos.x /= k;
-	base->o.pos.y /= k;
-	base->i.pos.x /= k;
-	base->i.pos.y /= k;
-	base->j.pos.x /= k;
-	base->j.pos.y /= k;
-	base->k.pos.x /= k;
-	base->k.pos.y /= k;
+	t_pos	i;
+	t_pos	j;
+	t_pos	l;
+
+	i.x = k >= base->i.pos.x ? base->i.pos.x : k;
+	i.y = k >= base->i.pos.y ? base->i.pos.y : k;
+	j.x = k >= base->j.pos.x ? base->j.pos.x : k;
+	j.y = k >= base->j.pos.y ? base->j.pos.y : k;
+	l.x = k >= base->k.pos.x ? base->k.pos.x : k;
+	l.y = k >= base->k.pos.y ? base->k.pos.y : k;
+	base->i.pos.x /= !i.x ? 1 : i.x;
+	base->i.pos.y /= !i.y ? 1 : i.y;
+	base->j.pos.x /= !j.x ? 1 : j.x;
+	base->j.pos.y /= !j.y ? 1 : j.y;
+	base->k.pos.x /= !l.x ? 1 : l.x;
+	base->k.pos.y /= !l.y ? 1 : l.y;
 	fdf->i = 0;
 	fdf->j = 0;
 	fdf->k = 0;
@@ -45,6 +69,19 @@ void			scale_base_plus(t_fdf *fdf, t_base *base, int k)
 	fdf->j = 0;
 	fdf->k = 0;
 	fdf->l = 0;
+}
+
+void			move_center(t_fdf *fdf, t_base *base, int o_x, int o_y)
+{
+	fdf = fdf;
+	base->o.pos.x += o_x;
+	base->o.pos.y += o_y;
+	base->i.pos.x += o_x;
+	base->i.pos.y += o_y;
+	base->j.pos.x += o_x;
+	base->j.pos.y += o_y; 
+	base->k.pos.x += o_x;
+	base->k.pos.y += o_y;
 }
 
 void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
@@ -125,6 +162,7 @@ void			init_mlx(t_fdf *fdf)
 	int		width;
 	int		o_x;
 	int		o_y;
+	int		a;
 	
 	heigh = distance(fdf->dwn, fdf->up);
 	width = distance(fdf->rgt, fdf->lft);
@@ -135,21 +173,30 @@ void			init_mlx(t_fdf *fdf)
 	//	while (heigh > (MAX_HEIGH - INC_H * 2))
 	//	{
 			ft_putendl("heigh > M_H - k * 2"); /**************/
-			scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
+		ft_putendl("before");
+			print_base(&(fdf->base));
+			a = (int)((int)heigh / (int)(OBJ_H));
+			scale_base_moins(fdf, &(fdf->base), a);
+	//		a = (int)OBJ_H;
+	//		printf("heigh = [%d]\n", );
+			ft_putendl("after");
+			print_base(&(fdf->base));
 			update_tab(fdf);
 			heigh = MAX_HEIGH;
+//			print_coord(fdf->tab, fdf->tab_h);
 //		et redim;
 	//	}
 	}
 	else
 		heigh += (INC_H * 2);
+	
 	if (width > (MAX_WIDTH - INC_W * 2))
 	{
 //	while (width > (MAX_WIDTH - INC_W * 2))
 //	{	
 		ft_putendl("width > M_W - k * 2"); /**************/
-		scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
-		update_tab(fdf);
+	//	scale_base_moins(fdf, &(fdf->base), heigh / OBJ_H);
+	//	update_tab(fdf);
 		width = MAX_WIDTH;
 //		et redim;
 //	}
@@ -166,13 +213,14 @@ void			init_mlx(t_fdf *fdf)
 	if (fdf)
 	{
 		if (!(fdf->mlx = mlx_init()))
-				check_errors(MALLOC, "init_env.c", "tmp->mlx");
+			check_errors(MALLOC, "init_env.c", "tmp->mlx");
 		if (!(fdf->win = mlx_new_window(fdf->mlx, width, heigh, "tmp")))
 			check_errors(MALLOC, "init_env.c", "fdf->win");
 	}
-	o_x = width / 2 - (fdf->rgt - fdf->lft) / 2;
-	o_y = heigh / 2 - (fdf->dwn - fdf->up) / 2;
-	set_base(fdf, &(fdf->base), o_x, o_y);
+	o_x = width / 2 - distance(fdf->rgt, fdf->lft) / 2;
+	o_y = heigh / 2 - distance(fdf->dwn, fdf->up) / 2;
+	move_center(fdf, &(fdf->base), o_x, o_y);
+	print_base(&(fdf->base));
 }
 
 
