@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 08:12:36 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 03:34:56 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 03:50:56 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ void	update_coord(t_fdf *fdf, t_coord *e)
 void		fill_pt(t_fdf *fdf, t_coord *e)
 {
 //	e->pt.x = j;
-	if (fdf->axe == Y)
-		e->pt.z += fdf->vely;
-	if (fdf->axe == X)
-		e->pt.x += fdf->velx;
+	e->pt.z += fdf->vely;
+	e->pt.x += fdf->velx;
 //	e->pt.z = i;
 	update_coord(fdf, e);
 	get_limits(e, fdf);
