@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 01:10:59 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 02:19:51 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@
 
 # define ESCAPE 65307
 
-# define UNIT 5000
+# define UNIT 2000
 
 # define O_X 0 
 # define O_Y 0
+
+# define X 1
+# define Z -1
 
 /*
 ** key_state
@@ -203,6 +206,8 @@ struct			s_fdf
 	int			j;
 	int			k;
 	int			l;
+	int			axe;
+	int			vel;
 };
 
 /*
@@ -276,7 +281,8 @@ void		draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color);
 ** math_ope_01.c
 */
 
-void		scale_base_moins(t_fdf *fdf, t_base *base, int k);
-void		scale_base_plus(t_fdf *fdf, t_base *base, int k);
-void		move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
+void			move_axis(t_base *base, int axis, int k);
+void			scale_base_moins(t_fdf *fdf, t_base *base, int k);
+void			scale_base_plus(t_fdf *fdf, t_base *base, int k);
+void			move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
 #endif

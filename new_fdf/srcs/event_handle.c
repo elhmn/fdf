@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 13:53:13 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 02:24:52 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,27 @@ int		keyRelease_hook(int key, void *param)
 		destroy_env(fdf);
 		exit(0);
 	}
-//	printf("Key = [%d]\n", key); /****************/
+	if (key == 65361)
+	{
+		fdf->axe = 0;
+		fdf->vel = 0;
+	}
+	if (key == 65363)
+	{
+		fdf->axe = 0;
+		fdf->vel = 0;
+	}
+	if (key == 65364)
+	{
+		fdf->axe = 0;
+		fdf->vel = 0;
+	}
+	if (key == 65362)
+	{
+		fdf->axe = 0;
+		fdf->vel = 0;
+	}
+	printf("Key = [%d]\n", key); /****************/
 	return (0);
 }
 
@@ -34,7 +54,26 @@ int		keyPress_hook(int key, void *param)
 
 	fdf = (t_fdf*)param;
 	fdf = fdf;
-	key = key;
+	if (key == 65361)
+	{
+		fdf->axe = X;
+		fdf->vel = -1;
+	}
+	if (key == 65363)
+	{
+		fdf->axe = X;
+		fdf->vel = 1;
+	}
+	if (key == 65364)
+	{
+		fdf->axe = Z;
+		fdf->vel = 1;
+	}
+	if (key == 65362)
+	{
+		fdf->axe = Z;
+		fdf->vel = -1;
+	}
 //	printf("Key = [%d]\n", key); /***************/
 	return (0);
 }
@@ -64,8 +103,15 @@ int		loop_hook(void *param)
 	fdf = (void*)param;
 	if (fdf->refresh)
 	{
+		update_tab(fdf);
 		draw_fdf(fdf);
 		fdf->refresh = 0;
+	}
+	if (fdf->axe && (fdf->axe || fdf->vel))
+	{
+		move_axis(&(fdf->base), fdf->axe, fdf->vel);
+		update_tab(fdf);
+		fdf->refresh = 1;
 	}
 	return (0);
 }

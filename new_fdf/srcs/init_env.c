@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 01:21:15 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 02:09:12 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,16 @@ void			init_mlx(t_fdf *fdf)
 		ft_putendl("after");/***********/
 		print_base(&(fdf->base)); /**********/
 		update_tab(fdf);
+	//	heigh = distance(fdf->dwn, fdf->up);
 		heigh = MAX_HEIGH;
+//		print_coord(fdf->tab, fdf->tab_h);
 	}
 	else
 		heigh += (INC_H * 2);
 	if (width > (MAX_WIDTH - INC_W * 2))
 	{
+	//	while  (width > (MAX_WIDTH - INC_W * 2))
+	//	{
 		if (!a)
 		{
 			ft_putendl("width > M_W - k * 2"); /**************/
@@ -115,7 +119,9 @@ void			init_mlx(t_fdf *fdf)
 			ft_putendl("after");/***********/
 			print_base(&(fdf->base)); /**********/
 			update_tab(fdf);
+	///		width = distance(fdf->rgt, fdf->lft);
 		}
+	//	}
 		width = MAX_WIDTH;
 //	}
 	}
@@ -142,6 +148,7 @@ void			init_mlx(t_fdf *fdf)
 	o_y = distance(fdf->dwn, fdf->up) / 2 < heigh / 2 ? heigh / 2 - distance(fdf->dwn, fdf->up) / 2 : 0;
 	o_x = ((distance(fdf->lft, fdf->rgt) / 2 < width / 2) && o_y) ? width / 2 - distance(fdf->rgt, fdf->lft) / 2 : 0;
 	move_center(fdf, &(fdf->base), o_x, o_y);
+	update_tab(fdf);
 	print_base(&(fdf->base));
 }
 
@@ -165,6 +172,8 @@ void	init_env(t_fdf **fdf)
 	tmp->lft = -1;
 	tmp->white = NULL;
 	tmp->img = NULL;
+	tmp->axe = 0;
+	tmp->vel = 0;
 	if (!(tmp->lay = (t_lay*)malloc(sizeof(t_lay))))
 			check_errors(MALLOC, "tmp->lay", "init_env.c");
 	tmp->white = init_color(NULL, WHITE);
