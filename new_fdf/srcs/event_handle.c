@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 02:24:52 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 03:37:35 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,25 @@ int		keyRelease_hook(int key, void *param)
 		destroy_env(fdf);
 		exit(0);
 	}
-	if (key == 65361)
+	else if (key == 65361)
 	{
 		fdf->axe = 0;
-		fdf->vel = 0;
+		fdf->velx = 0;
 	}
-	if (key == 65363)
+	else if (key == 65363)
 	{
 		fdf->axe = 0;
-		fdf->vel = 0;
+		fdf->velx = 0;
 	}
-	if (key == 65364)
+	else if (key == 65364)
 	{
 		fdf->axe = 0;
-		fdf->vel = 0;
+		fdf->vely = 0;
 	}
-	if (key == 65362)
+	else if (key == 65362)
 	{
 		fdf->axe = 0;
-		fdf->vel = 0;
+		fdf->vely = 0;
 	}
 	printf("Key = [%d]\n", key); /****************/
 	return (0);
@@ -57,22 +57,22 @@ int		keyPress_hook(int key, void *param)
 	if (key == 65361)
 	{
 		fdf->axe = X;
-		fdf->vel = -1;
+		fdf->velx = -1;
 	}
-	if (key == 65363)
+	else if (key == 65363)
 	{
 		fdf->axe = X;
-		fdf->vel = 1;
+		fdf->velx= 1;
 	}
-	if (key == 65364)
+	else if (key == 65364)
 	{
-		fdf->axe = Z;
-		fdf->vel = 1;
+		fdf->axe = Y;
+		fdf->vely = 1;
 	}
-	if (key == 65362)
+	else if (key == 65362)
 	{
-		fdf->axe = Z;
-		fdf->vel = -1;
+		fdf->axe = Y;
+		fdf->vely = -1;
 	}
 //	printf("Key = [%d]\n", key); /***************/
 	return (0);
@@ -107,10 +107,10 @@ int		loop_hook(void *param)
 		draw_fdf(fdf);
 		fdf->refresh = 0;
 	}
-	if (fdf->axe && (fdf->axe || fdf->vel))
+	if (fdf->axe)
 	{
-		move_axis(&(fdf->base), fdf->axe, fdf->vel);
-		update_tab(fdf);
+//		move_axis(&(fdf->base), fdf->axe, fdf->vel);
+		update_pt(fdf);
 		fdf->refresh = 1;
 	}
 	return (0);

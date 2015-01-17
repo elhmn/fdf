@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 08:12:36 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 13:57:58 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 03:34:56 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,37 @@ void	update_coord(t_fdf *fdf, t_coord *e)
 	e->pos.y = e->pt.x * fdf->base.i.pos.y + e->pt.y * fdf->base.j.pos.y
 		+ e->pt.z * fdf->base.k.pos.y + fdf->base.o.pos.y * alph;
 
+}
+
+void		fill_pt(t_fdf *fdf, t_coord *e)
+{
+//	e->pt.x = j;
+	if (fdf->axe == Y)
+		e->pt.z += fdf->vely;
+	if (fdf->axe == X)
+		e->pt.x += fdf->velx;
+//	e->pt.z = i;
+	update_coord(fdf, e);
+	get_limits(e, fdf);
+}
+
+void	update_pt(t_fdf *fdf)
+{
+	t_coord 	**tab;
+	int			i;
+	int			j;
+
+	i = -1;
+	tab = fdf->tab;
+	while (++i < fdf->tab_h)
+	{
+		j = -1;
+		while (tab[i][++j].end)
+		{
+			fill_pt(fdf, tab[i] + j);
+			get_limits(tab[i] + j, fdf);
+		}
+	}
 }
 
 void	update_tab(t_fdf *fdf)

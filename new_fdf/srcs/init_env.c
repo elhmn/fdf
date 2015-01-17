@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 02:09:12 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 03:35:36 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,8 @@ void	init_env(t_fdf **fdf)
 	tmp->white = NULL;
 	tmp->img = NULL;
 	tmp->axe = 0;
-	tmp->vel = 0;
+	tmp->velx = 0;
+	tmp->vely = 0;
 	if (!(tmp->lay = (t_lay*)malloc(sizeof(t_lay))))
 			check_errors(MALLOC, "tmp->lay", "init_env.c");
 	tmp->white = init_color(NULL, WHITE);

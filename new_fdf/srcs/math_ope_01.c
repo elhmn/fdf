@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 17:16:41 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 02:22:16 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 02:47:46 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void			move_axis(t_base *base, int axis, int k)
 {
-	if (axis == X)
+	if (axis == Y)
 	{
-		base->i.pos.x += k;
-		base->i.pos.y += k;
-	}
-	if (axis == Z)
-	{
+		base->j.pos.x += k;
+		base->j.pos.y += k;
 		base->k.pos.x += k;
 		base->k.pos.y += k;
+		base->i.pos.x += k;
+		base->i.pos.y += k;
 	}
 }
 

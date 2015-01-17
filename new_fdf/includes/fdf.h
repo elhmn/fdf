@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 02:19:51 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 03:35:08 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define O_Y 0
 
 # define X 1
+# define Y 2
 # define Z -1
 
 /*
@@ -207,7 +208,8 @@ struct			s_fdf
 	int			k;
 	int			l;
 	int			axe;
-	int			vel;
+	int			velx;
+	int			vely;
 };
 
 /*
@@ -252,7 +254,9 @@ void	get_limits(t_coord *e, t_fdf *fdf);
 */
 
 void			update_tab(t_fdf *fdf);
+void			update_pt(t_fdf *fdf);
 void			update_coord(t_fdf *fdf, t_coord *e);
+void			fill_pt(t_fdf *fdf, t_coord *e);
 
 /*
 ** draw.c
