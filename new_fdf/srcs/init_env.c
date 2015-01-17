@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/16 16:17:28 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 01:21:15 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 {
 	base->o.pos.x = o_x;
 	base->o.pos.y = o_y;
-	base->i.pos.x = o_x + UNIT + 20;
+	base->i.pos.x = o_x + UNIT;
 	base->i.pos.y = o_y;
 	base->j.pos.x = o_x;
-	base->j.pos.y = o_y - 2;
+	base->j.pos.y = o_y - UNIT / 2;
 	base->k.pos.x = o_x + 10;
-	base->k.pos.y = o_y + UNIT - 3;
+	base->k.pos.y = o_y + UNIT - UNIT / 4;
 	fdf->i = 0;
 	fdf->j = 0;
 	fdf->k = 0;
@@ -93,13 +93,12 @@ void			init_mlx(t_fdf *fdf)
 		ft_putendl("before"); /********/
 		print_base(&(fdf->base));
 		a = (int)((int)heigh / (int)(OBJ_H));
+		print_type("a", &a, INT);
 		scale_base_moins(fdf, &(fdf->base), a);
 		ft_putendl("after");/***********/
 		print_base(&(fdf->base)); /**********/
 		update_tab(fdf);
 		heigh = MAX_HEIGH;
-//		print_coord(fdf->tab, fdf->tab_h);
-	//	}
 	}
 	else
 		heigh += (INC_H * 2);
@@ -111,6 +110,7 @@ void			init_mlx(t_fdf *fdf)
 			ft_putendl("before");/********/
 			print_base(&(fdf->base));
 			a = (int)((int)width / (int)(OBJ_W));
+			print_type("a", &a, INT);
 			scale_base_moins(fdf, &(fdf->base), a);
 			ft_putendl("after");/***********/
 			print_base(&(fdf->base)); /**********/

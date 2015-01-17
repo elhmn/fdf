@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 00:08:25 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 00:40:57 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ static	int	w_tab(t_coord *tab)
 
 int			altitude(int alt)
 {
+	if (alt < -10)
+		return (NEGDWN);
+	if (alt >= -10 && alt < -5)
+		return (NEGMIUP);
+	if (alt >= -5 && alt < 0)
+		return (NEGUP);
 	if (alt >= 0 && alt < 5)
 		return (DWN);
 	if (alt >= 0 && alt < 10)
@@ -71,25 +77,21 @@ void		choose_color1(t_fdf *fdf, t_coord **tab, int i, int j)
 	alt1 = altitude(tab[i + 1][j].pt.y);
 	alt2 = altitude(tab[i][j].pt.y);
 	if (alt1 == DWN || alt2 == DWN)
-	{
 		fdf->white = init_color(NULL, DWN);
-	}
 	else if (alt1 == MIDWN || alt2 == MIDWN)
-	{
 		fdf->white = init_color(NULL, MIDWN);
-	}
 	else if (alt1 == MIUP || alt2 == MIUP)
-	{
 		fdf->white = init_color(NULL, MIUP);
-	}
 	else if (alt1 == UP || alt2 == UP)
-	{
 		fdf->white = init_color(NULL, UP);
-	}
 	else if (alt1 == UPPER || alt2 == UPPER)
-	{
 		fdf->white = init_color(NULL, UPPER);
-	}
+	else if (alt1 == NEGDWN || alt2 == NEGDWN)
+		fdf->white = init_color(NULL, NEGDWN);
+	else if (alt1 == NEGMIUP || alt2 == NEGMIUP)
+		fdf->white = init_color(NULL, NEGMIUP);
+	else if (alt1 == NEGUP || alt2 == NEGUP)
+		fdf->white = init_color(NULL, NEGUP);
 }
 
 void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j)
@@ -100,25 +102,21 @@ void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j)
 	alt1 = altitude(tab[i][j].pt.y);
 	alt2 = altitude(tab[i][j + 1].pt.y);
 	if (alt1 == DWN || alt2 == DWN)
-	{
 		fdf->white = init_color(NULL, DWN);
-	}
 	else if (alt1 == MIDWN || alt2 == MIDWN)
-	{
 		fdf->white = init_color(NULL, MIDWN);
-	}
 	else if (alt1 == MIUP || alt2 == MIUP)
-	{
 		fdf->white = init_color(NULL, MIUP);
-	}
 	else if (alt1 == UP || alt2 == UP)
-	{
 		fdf->white = init_color(NULL, UP);
-	}
 	else if (alt1 == UPPER || alt2 == UPPER)
-	{
 		fdf->white = init_color(NULL, UPPER);
-	}
+	else if (alt1 == NEGDWN || alt2 == NEGDWN)
+		fdf->white = init_color(NULL, NEGDWN);
+	else if (alt1 == NEGMIUP || alt2 == NEGMIUP)
+		fdf->white = init_color(NULL, NEGMIUP);
+	else if (alt1 == NEGUP || alt2 == NEGUP)
+		fdf->white = init_color(NULL, NEGUP);
 }
 
 static void	join_points(t_fdf *fdf)

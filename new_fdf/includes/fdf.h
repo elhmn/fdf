@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/16 15:35:32 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/17 01:10:59 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include "X.h"
 # include "libft.h"
 # include "get_next_line.h"
-
-# define UNIT 30
 
 # define ABS(x) (x < 0) ? -x : x
 
@@ -53,7 +51,7 @@
 
 # define ESCAPE 65307
 
-# define UNIT 30
+# define UNIT 5000
 
 # define O_X 0 
 # define O_Y 0
@@ -87,9 +85,12 @@ typedef struct s_draw	t_draw;
 
 enum				e_col
 {
-	DWN = 0x7F37FF,
+	NEGUP = 0xAD7800,
+	NEGMIUP = 0xC44C0A,
+	NEGDWN = 0xBA6008,
 	MIDWN = 0xA532E8,
 	MIUP = 0xED43FF,
+	DWN = 0x7F37FF,
 	UP = 0xE832AC,
 	UPPER = 0xFF3759
 };
