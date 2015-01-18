@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:42:15 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/15 06:57:58 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 21:27:14 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static	void	secu_strjoin(char **s1, char *s2)
 
 	tmp = *s1;
 	if (!(*s1 = ft_strjoin(*s1, s2)))
-		check_errors(NUL, "s1", "get_map.c");;
+		check_errors(NUL, "s1", "get_map.c");
 	free(tmp);
 }
 
@@ -79,7 +79,7 @@ static char		***get_map(int fd, t_fdf *fdf)
 	return (tab);
 }
 
-void		get_data(t_fdf *fdf, char *path)
+void			get_data(t_fdf *fdf, char *path)
 {
 	char	***map;
 	int		fd;
@@ -90,7 +90,6 @@ void		get_data(t_fdf *fdf, char *path)
 	map = get_map(fd, fdf);
 	print_tab(map);
 	set_tab(map, fdf);
-//	print_coord(fdf->tab, fdf->tab_h); /*******/
 	if (close(fd) == -1)
 		sys_errors("fd");
 }

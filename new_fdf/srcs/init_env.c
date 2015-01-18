@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 19:07:08 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 22:11:55 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include "check_errors.h"
 #include "debug.h"
 #include <stdio.h>
-
-void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
-{
-	base->o.pos.x = o_x;
-	base->o.pos.y = o_y;
-	base->i.pos.x = o_x + UNIT;
-	base->i.pos.y = o_y;
-	base->j.pos.x = o_x;
-	base->j.pos.y = o_y - UNIT / 2;
-	base->k.pos.x = o_x + 10;
-	base->k.pos.y = o_y + UNIT - UNIT / 4;
-	fdf->i = 0;
-	fdf->j = 0;
-	fdf->k = 0;
-	fdf->l = 0;
-}
 
 static void		init_base(t_fdf *fdf, t_base *base)
 {
@@ -51,34 +35,57 @@ static void		init_base(t_fdf *fdf, t_base *base)
 	}
 }
 
-int				distance(int a, int b)
+void			init_aux(t_fdf *fdf, int heigh, int width)
 {
-	if (a <= 0 &&  b >= 0)
-		return (-a + b);
-	if (a >= 0 &&  b <= 0)
-		return (a + -b);
-	if (a <= 0 && b <= 0 && a <= b)
-		return (-a - -b);
-	if (a <= 0 && b <= 0 && b <= a)
-		return (-b - -a);
-	if (a >= 0 && b >= 0 && b <= a)
-		return (a - b);
-	if (a >= 0 && b >= 0 && a <= b)
-		return (b - a);
-	return (0);
+	int	o_x;
+	int	o_y;
+
+	if (heigh > width && width < heigh / MOD)
+		width = heigh / MOD + INC_W * 2;
+	if (width > heigh && heigh < width / MOD)
+		heigh = width / MOD + INC_H * 2;
+	fdf->heigh = heigh;
+	fdf->width = width;
+	if (fdf)
+	{
+		if (!(fdf->mlx = mlx_init()))
+			check_errors(MALLOC, "init_env.c", "tmp->mlx");
+		if (!(fdf->win = mlx_new_window(fdf->mlx, width, heigh, "tmp")))
+			check_errors(MALLOC, "init_env.c", "fdf->win");
+	}
+	o_y = distance(fdf->dwn, fdf->up) / 2 < heigh / 2 ? heigh / 2 -
+			distance(fdf->dwn, fdf->up) / 2 : 0;
+	o_x = ((distance(fdf->lft, fdf->rgt) / 2 < width / 2) && o_y) ? width / 2 -
+			distance(fdf->rgt, fdf->lft) / 2 : 0;
+	move_center(fdf, &(fdf->base), o_x, o_y);
+	update_tab(fdf);
+}
+
+void			aux_width(int *width, t_fdf *fdf, int a)
+{
+	if (*width > (MAX_WIDTH - INC_W * 2))
+	{
+		if (!a)
+		{
+			a = (int)((int)*width / (int)(OBJ_W));
+			scale_base_moins(fdf, &(fdf->base), a);
+			update_tab(fdf);
+		}
+		*width = MAX_WIDTH;
+	}
+	else
+		*width += (INC_W * 2);
 }
 
 void			init_mlx(t_fdf *fdf)
 {
 	int		heigh;
 	int		width;
-	int		o_x;
-	int		o_y;
 	int		a;
-	
+
+	a = 0;
 	heigh = distance(fdf->dwn, fdf->up);
 	width = distance(fdf->rgt, fdf->lft);
-	a = 0;
 	if (heigh > (MAX_HEIGH - INC_H * 2))
 	{
 		print_base(&(fdf->base));
@@ -89,40 +96,11 @@ void			init_mlx(t_fdf *fdf)
 	}
 	else
 		heigh += (INC_H * 2);
-	if (width > (MAX_WIDTH - INC_W * 2))
-	{
-		if (!a)
-		{
-			a = (int)((int)width / (int)(OBJ_W));
-			scale_base_moins(fdf, &(fdf->base), a);
-			update_tab(fdf);
-		}
-		width = MAX_WIDTH;
-	}
-	else
-		width += (INC_W * 2);
-	if (heigh > width && width < heigh / MOD)
-		width = heigh / MOD + INC_W * 2;
-	if (width > heigh && heigh < width / MOD)
-			heigh = width / MOD + INC_H * 2;
-	fdf->heigh = heigh;
-	fdf->width = width;
-	if (fdf)
-	{
-		if (!(fdf->mlx = mlx_init()))
-			check_errors(MALLOC, "init_env.c", "tmp->mlx");
-		if (!(fdf->win = mlx_new_window(fdf->mlx, width, heigh, "tmp")))
-			check_errors(MALLOC, "init_env.c", "fdf->win");
-	}
-	o_y = distance(fdf->dwn, fdf->up) / 2 < heigh / 2 ? heigh / 2 - distance(fdf->dwn, fdf->up) / 2 : 0;
-	o_x = ((distance(fdf->lft, fdf->rgt) / 2 < width / 2) && o_y) ? width / 2 - distance(fdf->rgt, fdf->lft) / 2 : 0;
-	move_center(fdf, &(fdf->base), o_x, o_y);
-	update_tab(fdf);
-	print_base(&(fdf->base));
+	aux_width(&width, fdf, a);
+	init_aux(fdf, heigh, width);
 }
 
-
-void	init_env(t_fdf **fdf)
+void			init_env(t_fdf **fdf)
 {
 	t_fdf	*tmp;
 
@@ -146,7 +124,7 @@ void	init_env(t_fdf **fdf)
 	tmp->vely = 0;
 	tmp->move = MOVE;
 	if (!(tmp->lay = (t_lay*)malloc(sizeof(t_lay))))
-			check_errors(MALLOC, "tmp->lay", "init_env.c");
+		check_errors(MALLOC, "tmp->lay", "init_env.c");
 	tmp->white = init_color(NULL, WHITE);
 	init_base(tmp, &(tmp->base));
 }

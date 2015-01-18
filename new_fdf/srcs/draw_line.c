@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/14 05:27:49 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 19:25:10 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 21:18:49 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static t_draw	*init_d(t_draw *d, t_pos a, t_pos b, t_color *col)
 	return (d);
 }
 
-static void		draw_1(t_fdf *fdf, t_pos A, t_draw *d)
+static void		draw_1(t_fdf *fdf, t_pos a, t_draw *d)
 {
 	int		fun_choice;
 	int		i;
 
 	i = 0;
 	fun_choice = d->ey - d->dx;
-	pixel_put_img(fdf, A.x, A.y, d->color);
+	pixel_put_img(fdf, a.x, a.y, d->color);
 	while (i < d->dx)
 	{
 		if (fun_choice < 0)
@@ -47,22 +47,22 @@ static void		draw_1(t_fdf *fdf, t_pos A, t_draw *d)
 		else
 		{
 			fun_choice += d->ey - d->ex;
-			A.y += d->incy;
+			a.y += d->incy;
 		}
-		A.x += d->incx;
+		a.x += d->incx;
 		i++;
-		pixel_put_img(fdf, A.x, A.y, d->color);
+		pixel_put_img(fdf, a.x, a.y, d->color);
 	}
 }
 
-static void		draw_2(t_fdf *fdf, t_pos A, t_draw *d)
+static void		draw_2(t_fdf *fdf, t_pos a, t_draw *d)
 {
 	int		fun_choice;
 	int		i;
 
 	i = 0;
 	fun_choice = d->ex - d->dy;
-	pixel_put_img(fdf, A.x, A.y, d->color);
+	pixel_put_img(fdf, a.x, a.y, d->color);
 	while (i < d->dy)
 	{
 		if (fun_choice < 0)
@@ -70,21 +70,21 @@ static void		draw_2(t_fdf *fdf, t_pos A, t_draw *d)
 		else
 		{
 			fun_choice += d->ex - d->ey;
-			A.x += d->incx;
+			a.x += d->incx;
 		}
-		A.y += d->incy;
+		a.y += d->incy;
 		i++;
-		pixel_put_img(fdf, A.x, A.y, d->color);
+		pixel_put_img(fdf, a.x, a.y, d->color);
 	}
 }
 
-void			draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color)
+void			draw_line(t_fdf *fdf, t_pos a, t_pos b, t_color *color)
 {
-	t_draw 	*d;	
+	t_draw	*d;
 
-	d = init_d(NULL, A, B, color);
+	d = init_d(NULL, a, b, color);
 	if (d->dx > d->dy)
-		draw_1(fdf, A, d);
+		draw_1(fdf, a, d);
 	else
-		draw_2(fdf, A, d);
+		draw_2(fdf, a, d);
 }

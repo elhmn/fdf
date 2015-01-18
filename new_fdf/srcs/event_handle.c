@@ -6,14 +6,40 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 19:20:40 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 21:25:51 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "check_errors.h"
 
-int		keyrelease_hook(int key, void *param)
+static void		second_key(int key, t_fdf *fdf)
+{
+	if (key == K_ENTER)
+	{
+		if (fdf->move == MOVE)
+			fdf->move = MOVEA;
+		else if (fdf->move == MOVEA)
+			fdf->move = MOVE;
+	}
+	else if (key == K_PLUS)
+	{
+		scale_plus(fdf, 2);
+		fdf->refresh = 1;
+	}
+	else if (key == K_MOINS)
+	{
+		scale_moins(fdf, 2);
+		fdf->refresh = 1;
+	}
+	else if (key == K_UP)
+	{
+		fdf->axe = 0;
+		fdf->vely = 0;
+	}
+}
+
+int				keyrelease_hook(int key, void *param)
 {
 	t_fdf	*fdf;
 
@@ -38,37 +64,15 @@ int		keyrelease_hook(int key, void *param)
 		fdf->axe = 0;
 		fdf->vely = 0;
 	}
-	else if (key == K_UP)
-	{
-		fdf->axe = 0;
-		fdf->vely = 0;
-	}
-	else if (key == K_ENTER)
-	{
-		if (fdf->move == MOVE)
-			fdf->move = MOVEA;
-		else if (fdf->move == MOVEA)
-			fdf->move = MOVE;
-	}
-	else if (key == K_PLUS)
-	{
-		scale_plus(fdf, 2);
-		fdf->refresh = 1;;
-	}
-	else if (key == K_MOINS)
-	{
-		scale_moins(fdf, 2);
-		fdf->refresh = 1;;
-	}
+	second_key(key, fdf);
 	return (0);
 }
 
-int		keypress_hook(int key, void *param)
+int				keypress_hook(int key, void *param)
 {
 	t_fdf	*fdf;
 
 	fdf = (t_fdf*)param;
-	fdf = fdf;
 	if (key == K_LEFT)
 	{
 		fdf->axe = X;
@@ -77,7 +81,7 @@ int		keypress_hook(int key, void *param)
 	else if (key == K_RIGHT)
 	{
 		fdf->axe = X;
-		fdf->velx= 1;
+		fdf->velx = 1;
 	}
 	else if (key == K_DOWN)
 	{
@@ -92,7 +96,7 @@ int		keypress_hook(int key, void *param)
 	return (0);
 }
 
-int		expose_hook(void *param)
+int				expose_hook(void *param)
 {
 	t_fdf	*fdf;
 
@@ -110,7 +114,7 @@ int		expose_hook(void *param)
 	return (0);
 }
 
-int		loop_hook(void *param)
+int				loop_hook(void *param)
 {
 	t_fdf	*fdf;
 

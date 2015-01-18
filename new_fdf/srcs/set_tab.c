@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 16:50:59 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 03:48:48 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 21:38:07 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "check_errors.h"
 #include "debug.h"
 
-void	get_limits(t_coord *e, t_fdf *fdf)
+void		get_limits(t_coord *e, t_fdf *fdf)
 {
 	if (e->pos.x < fdf->lft || !fdf->i)
 	{
@@ -64,7 +64,7 @@ static int	line_size(char **map)
 	if (map)
 	{
 		while (*(map + len))
-			len++;	
+			len++;
 	}
 	return (len);
 }
@@ -79,10 +79,9 @@ void		set_tab(char ***map, t_fdf *fdf)
 	if (fdf)
 	{
 		if (!fdf->tab)
-		{
-			if (!(fdf->tab = (t_coord**)malloc(sizeof(t_coord*) * (fdf->tab_h))))
+			if (!(fdf->tab = (t_coord**)malloc(sizeof(t_coord*)
+					* (fdf->tab_h))))
 				check_errors(MALLOC, "fdf->tab", "set_tab.c");
-		}
 		while (*(map + ++i))
 		{
 			if ((len = line_size(*(map + i))) > fdf->tab_w)
@@ -92,8 +91,7 @@ void		set_tab(char ***map, t_fdf *fdf)
 				check_errors(MALLOC, "fdf->tab + i", "set_tab.c");
 			j = -1;
 			while (*(*(map + i) + ++j))
-				fill_coord(fdf, map[i][j],i, j);
-
+				fill_coord(fdf, map[i][j], i, j);
 			fdf->tab[i][j].end = 0;
 		}
 	}

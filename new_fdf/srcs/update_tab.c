@@ -6,28 +6,25 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/15 08:12:36 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 19:07:15 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 21:40:27 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-void	update_coord(t_fdf *fdf, t_coord *e)
+void		update_coord(t_fdf *fdf, t_coord *e)
 {
 	int		alph;
-	
+
 	alph = 1 - e->pt.x - e->pt.y - e->pt.z;
 	e->pos.x = e->pt.x * fdf->base.i.pos.x + e->pt.y * fdf->base.j.pos.x
 		+ e->pt.z * fdf->base.k.pos.x + fdf->base.o.pos.x * alph;
 	e->pos.y = e->pt.x * fdf->base.i.pos.y + e->pt.y * fdf->base.j.pos.y
 		+ e->pt.z * fdf->base.k.pos.y + fdf->base.o.pos.y * alph;
-
 }
 
 void		fill_pt(t_fdf *fdf, t_coord *e)
 {
-
 	if (fdf->move == MOVE)
 	{
 		if (e->pt.y)
@@ -36,7 +33,7 @@ void		fill_pt(t_fdf *fdf, t_coord *e)
 			if (!e->pt.y && fdf->vely > 0)
 				e->pt.y = 1;
 			if (!e->pt.y && fdf->vely < 0)
-					e->pt.y = -1;
+				e->pt.y = -1;
 		}
 		if (e->pt.y)
 			e->pt.x += fdf->velx;
@@ -50,9 +47,9 @@ void		fill_pt(t_fdf *fdf, t_coord *e)
 	get_limits(e, fdf);
 }
 
-void	update_pt(t_fdf *fdf)
+void		update_pt(t_fdf *fdf)
 {
-	t_coord 	**tab;
+	t_coord		**tab;
 	int			i;
 	int			j;
 
@@ -69,9 +66,9 @@ void	update_pt(t_fdf *fdf)
 	}
 }
 
-void	update_tab(t_fdf *fdf)
+void		update_tab(t_fdf *fdf)
 {
-	t_coord 	**tab;
+	t_coord		**tab;
 	int			i;
 	int			j;
 

@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 20:05:54 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 22:05:26 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,6 @@ struct					s_fdf
 
 void					init_env(t_fdf **fdf);
 void					init_mlx(t_fdf *fdf);
-int						distance(int a, int b);
-void					set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
 
 /*
 ** destroy_env.c
@@ -293,17 +291,25 @@ void					draw_line(t_fdf *fdf, t_pos a, t_pos b, t_color	*color);
 ** tools.c
 */
 
-void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j);
-void		choose_color1(t_fdf *fdf, t_coord **tab, int i, int j);
+void					scale_plus(t_fdf *fdf, int k);
+void					scale_moins(t_fdf *fdf, int k);
+void					choose_color2(t_fdf *fdf, t_coord **tab, int i, int j);
+void					choose_color1(t_fdf *fdf, t_coord **tab, int i, int j);
+void					move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
 
 /*
 ** math_ope_01.c
 */
 
-void					scale_plus(t_fdf *fdf, int k);
-void					scale_moins(t_fdf *fdf, int k);
 void					move_axis(t_base *base, int axis, int k);
 void					scale_base_moins(t_fdf *fdf, t_base *base, int k);
 void					scale_base_plus(t_fdf *fdf, t_base *base, int k);
-void					move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
+
+/*
+** math_ope_02.c
+*/
+
+int						distance(int a, int b);
+void					set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
+
 #endif

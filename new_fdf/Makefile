@@ -6,7 +6,7 @@
 #    By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/12 22:02:30 by bmbarga           #+#    #+#              #
-#    Updated: 2015/01/18 19:39:20 by bmbarga          ###   ########.fr        #
+#    Updated: 2015/01/18 21:57:35 by bmbarga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 SRC = main.c get_next_line.c check_errors.c fun_err_01.c destroy_env.c \
 	  init_env.c event_handle.c get_map.c debug_01.c set_tab.c color.c \
-	  draw.c draw_line.c update_tab.c math_ope_01.c tools.c
+	  draw.c draw_line.c update_tab.c math_ope_01.c tools.c math_ope_02.c \
 
 SRCDIR = ./srcs/
 
