@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 19:13:51 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 00:40:57 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 19:37:29 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void		pixel_put_img(t_fdf *fdf, int x, int y, t_color *col)
 		size = lay.line;
 		b = lay.bpp / 8;
 		x *= b;
-		if (size > 0 && (y < fdf->heigh && y >= 0) && (x >= 0 && x + lay.bpp / 8 < lay.line))
+		if (size > 0 && (y < fdf->heigh && y >= 0)
+				&& (x >= 0 && x + lay.bpp / 8 < lay.line))
 		{
 			image[(y * (size)) + x + 0] = col->b;
 			image[(y * (size)) + x + 1] = col->g;
@@ -69,56 +70,6 @@ int			altitude(int alt)
 	return (0);
 }
 
-void		choose_color1(t_fdf *fdf, t_coord **tab, int i, int j)
-{
-	int		alt1;
-	int		alt2;
-
-	alt1 = altitude(tab[i + 1][j].pt.y);
-	alt2 = altitude(tab[i][j].pt.y);
-	if (alt1 == DWN || alt2 == DWN)
-		fdf->white = init_color(NULL, DWN);
-	else if (alt1 == MIDWN || alt2 == MIDWN)
-		fdf->white = init_color(NULL, MIDWN);
-	else if (alt1 == MIUP || alt2 == MIUP)
-		fdf->white = init_color(NULL, MIUP);
-	else if (alt1 == UP || alt2 == UP)
-		fdf->white = init_color(NULL, UP);
-	else if (alt1 == UPPER || alt2 == UPPER)
-		fdf->white = init_color(NULL, UPPER);
-	else if (alt1 == NEGDWN || alt2 == NEGDWN)
-		fdf->white = init_color(NULL, NEGDWN);
-	else if (alt1 == NEGMIUP || alt2 == NEGMIUP)
-		fdf->white = init_color(NULL, NEGMIUP);
-	else if (alt1 == NEGUP || alt2 == NEGUP)
-		fdf->white = init_color(NULL, NEGUP);
-}
-
-void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j)
-{
-	int		alt1;
-	int		alt2;
-
-	alt1 = altitude(tab[i][j].pt.y);
-	alt2 = altitude(tab[i][j + 1].pt.y);
-	if (alt1 == DWN || alt2 == DWN)
-		fdf->white = init_color(NULL, DWN);
-	else if (alt1 == MIDWN || alt2 == MIDWN)
-		fdf->white = init_color(NULL, MIDWN);
-	else if (alt1 == MIUP || alt2 == MIUP)
-		fdf->white = init_color(NULL, MIUP);
-	else if (alt1 == UP || alt2 == UP)
-		fdf->white = init_color(NULL, UP);
-	else if (alt1 == UPPER || alt2 == UPPER)
-		fdf->white = init_color(NULL, UPPER);
-	else if (alt1 == NEGDWN || alt2 == NEGDWN)
-		fdf->white = init_color(NULL, NEGDWN);
-	else if (alt1 == NEGMIUP || alt2 == NEGMIUP)
-		fdf->white = init_color(NULL, NEGMIUP);
-	else if (alt1 == NEGUP || alt2 == NEGUP)
-		fdf->white = init_color(NULL, NEGUP);
-}
-
 static void	join_points(t_fdf *fdf)
 {
 	t_coord **tab;
@@ -152,7 +103,8 @@ void		draw_fdf(t_fdf *fdf)
 		mlx_destroy_image(fdf->mlx, fdf->bg);
 	if (!(fdf->bg = mlx_new_image(fdf->mlx, fdf->width, fdf->heigh)))
 		check_errors(MALLOC, "fdf->bg", "draw.c");
-	fdf->img = mlx_get_data_addr(fdf->bg, &(fdf->lay->bpp), &(fdf->lay->line), &(fdf->lay->endian));
+	fdf->img = mlx_get_data_addr(fdf->bg, &(fdf->lay->bpp),
+				&(fdf->lay->line), &(fdf->lay->endian));
 	if (!fdf->img)
 		check_errors(MALLOC, "img", "draw.c");
 	join_points(fdf);

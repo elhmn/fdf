@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:33:50 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 03:51:18 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 20:05:54 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # define ABS(x) (x < 0) ? -x : x
 
-//# define HOME
 # define FT
 
 # ifdef FT
@@ -33,14 +32,14 @@
 #  define MAX_HEIGH 1080
 #  define MAX_WIDTH 1920
 
-#endif
+# endif
 
 # ifdef HOME
 
-# define MAX_HEIGH 2160
-# define MAX_WIDTH 3840
+#  define MAX_HEIGH 2160
+#  define MAX_WIDTH 3840
 
-#endif
+# endif
 
 # define MOVE	1
 # define MOVEA	-1
@@ -62,7 +61,7 @@
 
 # define UNIT 2000
 
-# define O_X 0 
+# define O_X 0
 # define O_Y 0
 
 # define X 1
@@ -90,11 +89,11 @@ typedef struct s_draw	t_draw;
 ** draw.c data
 */
 
-# define	MASK_R		0xFF0000
-# define	MASK_G		0x00FF00
-# define	MASK_B		0x0000FF
+# define MASK_R		0xFF0000
+# define MASK_G		0x00FF00
+# define MASK_B		0x0000FF
 
-# define	WHITE		0xFFFFFF
+# define WHITE		0xFFFFFF
 
 enum				e_col
 {
@@ -108,7 +107,7 @@ enum				e_col
 	UPPER = 0xFF3759
 };
 
-struct				s_color
+struct					s_color
 {
 	unsigned int	alpha;
 	unsigned int	color;
@@ -117,10 +116,10 @@ struct				s_color
 	unsigned int	b;
 };
 
-struct				s_draw
+struct					s_draw
 {
-	int		Ex;
-	int		Ey;
+	int		ex;
+	int		ey;
 	int		incx;
 	int		incy;
 	int		dx;
@@ -128,21 +127,20 @@ struct				s_draw
 	t_color	*color;
 };
 
-struct				s_lay
+struct					s_lay
 {
 	void		*img;
 	int			bpp;
 	int			line;
 	int			endian;
-	int		depht;
+	int			depht;
 };
-
 
 /*
 ** s_pt definit coordonnee dans l'espace 3D
 */
 
-struct			s_pt
+struct					s_pt
 {
 	int			x;
 	int			y;
@@ -153,7 +151,7 @@ struct			s_pt
 ** s_pos definit coord dans l'espace 2D
 */
 
-struct			s_pos
+struct					s_pos
 {
 	int			x;
 	int			y;
@@ -163,7 +161,7 @@ struct			s_pos
 ** s_coord combine coord dans les espaces 2D et 3D
 */
 
-struct			s_coord
+struct					s_coord
 {
 	t_pt		pt;
 	t_pos		pos;
@@ -174,7 +172,7 @@ struct			s_coord
 ** s_base definit les coords du repere 3D
 */
 
-struct			s_base
+struct					s_base
 {
 	t_coord		o;
 	t_coord		i;
@@ -188,10 +186,9 @@ struct			s_base
 ** rgt est le pt le plus a droite
 ** up est le pt le plus en haut
 ** dwn est le pt le plus en bas
-** 
 */
 
-struct			s_fdf
+struct					s_fdf
 {
 	void		*mlx;
 	void		*win;
@@ -226,79 +223,87 @@ struct			s_fdf
 ** init_env.c
 */
 
-void			init_env(t_fdf **fdf);
-void			init_mlx(t_fdf *fdf);
-int				distance(int a, int b);
-void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
+void					init_env(t_fdf **fdf);
+void					init_mlx(t_fdf *fdf);
+int						distance(int a, int b);
+void					set_base(t_fdf *fdf, t_base *base, int o_x, int o_y);
 
 /*
 ** destroy_env.c
 */
 
-void			destroy_env(t_fdf *fdf);
+void					destroy_env(t_fdf *fdf);
 
 /*
 ** event_handle.c
 */
 
-int				keyRelease_hook(int key, void *param);
-int				keyPress_hook(int key, void *param);
-int				loop_hook(void *param);
-int				expose_hook(void *param);
+int						keyrelease_hook(int key, void *param);
+int						keypress_hook(int key, void *param);
+int						loop_hook(void *param);
+int						expose_hook(void *param);
 
 /*
 ** get_map.c
 */
 
-void			get_data(t_fdf *fdf, char *path);
+void					get_data(t_fdf *fdf, char *path);
 
 /*
 ** set_tab.c
 */
 
-void			set_tab(char ***map, t_fdf *fdf);
-void	get_limits(t_coord *e, t_fdf *fdf);
+void					set_tab(char ***map, t_fdf *fdf);
+void					get_limits(t_coord *e, t_fdf *fdf);
 
 /*
 ** update_tab.c
 */
 
-void			update_tab(t_fdf *fdf);
-void			update_pt(t_fdf *fdf);
-void			update_coord(t_fdf *fdf, t_coord *e);
-void			fill_pt(t_fdf *fdf, t_coord *e);
+void					update_tab(t_fdf *fdf);
+void					update_pt(t_fdf *fdf);
+void					update_coord(t_fdf *fdf, t_coord *e);
+void					fill_pt(t_fdf *fdf, t_coord *e);
 
 /*
 ** draw.c
 */
 
-void		draw_fdf(t_fdf *fdf);
-void		pixel_put_img(t_fdf *fdf, int x, int y, t_color *col);
+int						altitude(int alt);
+void					draw_fdf(t_fdf *fdf);
+void					pixel_put_img(t_fdf *fdf, int x, int y, t_color *col);
 
 /*
 ** color.c
 */
 
-void		set_color(t_color *col);
-t_uint		RGB_to_color(unsigned int r, unsigned int g, unsigned int b);
-void		low_light(t_color *color, unsigned int inc, int sign);
-void		print_color(t_color *color);
-t_color		*init_color(t_color	*color, unsigned int col);
+void					set_color(t_color *col);
+t_uint					rgb_to_color(t_uint r, t_uint g, t_uint b);
+void					low_light(t_color *color, unsigned int inc, int sign);
+void					print_color(t_color *color);
+t_color					*init_color(t_color	*color, unsigned int col);
 
 /*
 ** draw_line.c
 */
 
-void		draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color);
+void					draw_line(t_fdf *fdf, t_pos a, t_pos b, t_color	*color);
+
+/*
+** tools.c
+*/
+
+void		choose_color2(t_fdf *fdf, t_coord **tab, int i, int j);
+void		choose_color1(t_fdf *fdf, t_coord **tab, int i, int j);
 
 /*
 ** math_ope_01.c
 */
 
-void			scale_plus(t_fdf *fdf, int k);
-void			scale_moins(t_fdf *fdf, int k);
-void			move_axis(t_base *base, int axis, int k);
-void			scale_base_moins(t_fdf *fdf, t_base *base, int k);
-void			scale_base_plus(t_fdf *fdf, t_base *base, int k);
-void			move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
+void					scale_plus(t_fdf *fdf, int k);
+void					scale_moins(t_fdf *fdf, int k);
+void					move_axis(t_base *base, int axis, int k);
+void					scale_base_moins(t_fdf *fdf, t_base *base, int k);
+void					scale_base_plus(t_fdf *fdf, t_base *base, int k);
+void					move_center(t_fdf *fdf, t_base *base, int o_x, int o_y);
 #endif

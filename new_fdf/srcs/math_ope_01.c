@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/13 17:16:41 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 02:47:46 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 19:07:32 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,12 @@ void			scale_plus(t_fdf *fdf, int k)
 	int		i;
 	int		j;
 
-	// probleme trouver la limite du zoom++
 	i = -1;
 	while (++i < fdf->tab_h)
 	{
 		j = -1;
 		while (fdf->tab[i][++j].end)
-		{
 			scale_pt_plus(fdf, &(fdf->tab[i][j].pos), k);
-		}
 	}
 }
 
@@ -101,27 +98,13 @@ void			scale_moins(t_fdf *fdf, int k)
 {
 	int		i;
 	int		j;
-//	int		dist1;
-//	int		dist2;
 
-	// probleme trouver la limite du zoom-- 
 	i = -1;
 	while (++i < fdf->tab_h)
 	{
 		j = -1;
 		while (fdf->tab[i][++j].end)
-		{
-//			if (fdf->tab[i][j + 1].end && i + 1 < fdf->tab_h)
-//			{
-//				dist1 = distance(fdf->tab[i][j + 1].pos.x, fdf->tab[i][j].pos.x);
-//				dist2 = distance(fdf->tab[i + 1][j].pos.y, fdf->tab[i][j].pos.y);
-//			print_type("dist2", &dist2, INT);
-//			print_type("dist1", &dist1, INT);
-//			if (dist1 > dist1 / k && dist2 > dist2 / k)
 			scale_pt_moins(fdf, &(fdf->tab[i][j].pos), k);
-//			else
-//				scale_pt_moins(fdf, &(fdf->tab[i][j].pos), k);/
-		}
 	}
 }
 

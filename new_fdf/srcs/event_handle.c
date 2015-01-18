@@ -6,15 +6,14 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 20:55:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/17 03:42:12 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 19:20:40 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "check_errors.h"
-//#include <stdio.h> /********************/
 
-int		keyRelease_hook(int key, void *param)
+int		keyrelease_hook(int key, void *param)
 {
 	t_fdf	*fdf;
 
@@ -61,11 +60,10 @@ int		keyRelease_hook(int key, void *param)
 		scale_moins(fdf, 2);
 		fdf->refresh = 1;;
 	}
-//	printf("Key = [%d]\n", key); /****************/
 	return (0);
 }
 
-int		keyPress_hook(int key, void *param)
+int		keypress_hook(int key, void *param)
 {
 	t_fdf	*fdf;
 
@@ -91,8 +89,6 @@ int		keyPress_hook(int key, void *param)
 		fdf->axe = Y;
 		fdf->vely = -1;
 	}
-
-	printf("Key = [%d]\n", key); /***************/
 	return (0);
 }
 
@@ -117,21 +113,15 @@ int		expose_hook(void *param)
 int		loop_hook(void *param)
 {
 	t_fdf	*fdf;
-//	int		o_x;
-//	int		o_y;
 
 	fdf = (void*)param;
 	if (fdf->refresh)
 	{
-//		o_y = distance(fdf->dwn, fdf->up) / 2 < fdf->heigh / 2 ? fdf->heigh / 2 - distance(fdf->dwn, fdf->up) / 2 : 0;
-//		o_x = ((distance(fdf->lft, fdf->rgt) / 2 < fdf->width / 2) && o_y) ? fdf->width / 2 - distance(fdf->rgt, fdf->lft) / 2 : 0;
-//		move_center(fdf, &(fdf->base), o_x, o_y);
 		draw_fdf(fdf);
 		fdf->refresh = 0;
 	}
 	if (fdf->axe)
 	{
-//		move_axis(&(fdf->base), fdf->axe, fdf->vel);
 		update_pt(fdf);
 		fdf->refresh = 1;
 	}

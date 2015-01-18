@@ -6,11 +6,11 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/08 13:48:17 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/13 11:28:02 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/18 19:10:10 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	CHECK_ERRORS_H
+#ifndef CHECK_ERRORS_H
 # define CHECK_ERRORS_H
 # include "fdf.h"
 
@@ -34,14 +34,14 @@ enum	e_code
 ** fun_err_01.c
 */
 
-void		f_malloc(void);
-void		f_nul(void);
+void			f_malloc(void);
+void			f_nul(void);
 
 /*
 ** check_errors.c
 */
 
-void	check_errors(t_uint code, char *file_name, char *var_name);
-void	sys_errors(char *str);
+void			check_errors(t_uint code, char *file_name, char *var_name);
+void			sys_errors(char *str);
 
 #endif
