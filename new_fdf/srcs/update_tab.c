@@ -27,10 +27,28 @@ void	update_coord(t_fdf *fdf, t_coord *e)
 
 void		fill_pt(t_fdf *fdf, t_coord *e)
 {
-//	e->pt.x = j;
-	e->pt.z += fdf->vely;
-	e->pt.x += fdf->velx;
-//	e->pt.z = i;
+
+	if (fdf->move == MOVE)
+	{
+		if (e->pt.y)
+		{
+			e->pt.y += fdf->vely;
+			if (!e->pt.y && fdf->vely > 0)
+				e->pt.y = 1;
+			if (!e->pt.y && fdf->vely < 0)
+					e->pt.y = -1;
+		}
+		if (e->pt.y)
+			e->pt.x += fdf->velx;
+	}
+	else
+	{
+		e->pt.x += fdf->velx;
+//		e->pt.x = j;
+		e->pt.z += fdf->vely;
+//		e->pt.x += fdf->velx;
+//		e->pt.z = i;
+	}
 	update_coord(fdf, e);
 	get_limits(e, fdf);
 }

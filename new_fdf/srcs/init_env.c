@@ -175,6 +175,7 @@ void	init_env(t_fdf **fdf)
 	tmp->axe = 0;
 	tmp->velx = 0;
 	tmp->vely = 0;
+	tmp->move = MOVE;
 	if (!(tmp->lay = (t_lay*)malloc(sizeof(t_lay))))
 			check_errors(MALLOC, "tmp->lay", "init_env.c");
 	tmp->white = init_color(NULL, WHITE);

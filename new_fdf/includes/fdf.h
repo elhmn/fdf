@@ -42,6 +42,8 @@
 
 #endif
 
+# define MOVE	1
+# define MOVEA	-1
 # define INC_H	200
 # define INC_W	200
 # define MOD	2
@@ -49,7 +51,14 @@
 # define OBJ_H MAX_HEIGH - (INC_H * 2)
 # define OBJ_W MAX_WIDTH - (INC_W * 2)
 
-# define ESCAPE 65307
+# define K_ESCAPE 65307
+# define K_UP 65362
+# define K_DOWN 65364
+# define K_RIGHT 65363
+# define K_LEFT 65361
+# define K_ENTER 65293
+# define K_PLUS 65451
+# define K_MOINS 65453
 
 # define UNIT 2000
 
@@ -210,6 +219,7 @@ struct			s_fdf
 	int			axe;
 	int			velx;
 	int			vely;
+	int			move;
 };
 
 /*
@@ -285,6 +295,8 @@ void		draw_line(t_fdf *fdf, t_pos A, t_pos B, t_color	*color);
 ** math_ope_01.c
 */
 
+void			scale_plus(t_fdf *fdf, int k);
+void			scale_moins(t_fdf *fdf, int k);
 void			move_axis(t_base *base, int axis, int k);
 void			scale_base_moins(t_fdf *fdf, t_base *base, int k);
 void			scale_base_plus(t_fdf *fdf, t_base *base, int k);

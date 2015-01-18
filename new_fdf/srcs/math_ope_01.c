@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "debug.h"
 
 void			move_axis(t_base *base, int axis, int k)
 {
@@ -47,6 +48,81 @@ void			scale_base_moins(t_fdf *fdf, t_base *base, int k)
 	fdf->j = 0;
 	fdf->k = 0;
 	fdf->l = 0;
+}
+
+static void		scale_pt_plus(t_fdf *fdf, t_pos *pos, int k)
+{
+	t_pos	i;
+
+	i.x = k >= pos->x ? pos->x : k;
+	i.y = k >= pos->y ? pos->y : k;
+
+	pos->x *= (!i.x) ? 1 : i.x;
+	pos->y *= (!i.y) ? 1 : i.y;
+	fdf->i = 0;
+	fdf->j = 0;
+	fdf->k = 0;
+	fdf->l = 0;
+}
+
+void			scale_plus(t_fdf *fdf, int k)
+{
+	int		i;
+	int		j;
+
+	// probleme trouver la limite du zoom++
+	i = -1;
+	while (++i < fdf->tab_h)
+	{
+		j = -1;
+		while (fdf->tab[i][++j].end)
+		{
+			scale_pt_plus(fdf, &(fdf->tab[i][j].pos), k);
+		}
+	}
+}
+
+static void		scale_pt_moins(t_fdf *fdf, t_pos *pos, int k)
+{
+	t_pos	i;
+
+	i.x = (pos->x / k >= pos->x) ? pos->x : pos->x / k;
+	i.y = (pos->y / k >= pos->y) ? pos->y : pos->y / k;
+
+	pos->x = i.x;
+	pos->y = i.y;
+	fdf->i = 0;
+	fdf->j = 0;
+	fdf->k = 0;
+	fdf->l = 0;
+}
+
+void			scale_moins(t_fdf *fdf, int k)
+{
+	int		i;
+	int		j;
+//	int		dist1;
+//	int		dist2;
+
+	// probleme trouver la limite du zoom-- 
+	i = -1;
+	while (++i < fdf->tab_h)
+	{
+		j = -1;
+		while (fdf->tab[i][++j].end)
+		{
+//			if (fdf->tab[i][j + 1].end && i + 1 < fdf->tab_h)
+//			{
+//				dist1 = distance(fdf->tab[i][j + 1].pos.x, fdf->tab[i][j].pos.x);
+//				dist2 = distance(fdf->tab[i + 1][j].pos.y, fdf->tab[i][j].pos.y);
+//			print_type("dist2", &dist2, INT);
+//			print_type("dist1", &dist1, INT);
+//			if (dist1 > dist1 / k && dist2 > dist2 / k)
+			scale_pt_moins(fdf, &(fdf->tab[i][j].pos), k);
+//			else
+//				scale_pt_moins(fdf, &(fdf->tab[i][j].pos), k);/
+		}
+	}
 }
 
 void			scale_base_plus(t_fdf *fdf, t_base *base, int k)
