@@ -6,7 +6,7 @@
 /*   By: bmbarga <bmbarga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 19:57:42 by bmbarga           #+#    #+#             */
-/*   Updated: 2015/01/18 22:11:55 by bmbarga          ###   ########.fr       */
+/*   Updated: 2015/01/19 20:27:22 by bmbarga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void			init_mlx(t_fdf *fdf)
 	width = distance(fdf->rgt, fdf->lft);
 	if (heigh > (MAX_HEIGH - INC_H * 2))
 	{
-		print_base(&(fdf->base));
 		a = (int)((int)heigh / (int)(OBJ_H));
 		scale_base_moins(fdf, &(fdf->base), a);
 		update_tab(fdf);
