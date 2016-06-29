@@ -25,26 +25,30 @@
 
 # define ABS(x) (x < 0) ? -x : x
 
-# define FT
+# define HOME
+
+/*
+** #define FT
+*/
 
 # ifdef FT
-
-#  define MAX_HEIGH 1080
-#  define MAX_WIDTH 1920
-
-# endif
-
-# ifdef HOME
 
 #  define MAX_HEIGH 2160
 #  define MAX_WIDTH 3840
 
 # endif
 
+# ifdef HOME
+
+#  define MAX_HEIGH 760
+#  define MAX_WIDTH 1360
+
+# endif
+
 # define MOVE	1
 # define MOVEA	-1
-# define INC_H	200
-# define INC_W	200
+# define INC_H	100.
+# define INC_W	100.
 # define MOD	2
 
 # define OBJ_H MAX_HEIGH - (INC_H * 2)
@@ -59,10 +63,10 @@
 # define K_PLUS 65451
 # define K_MOINS 65453
 
-# define UNIT 2000
+# define UNIT 20. 
 
-# define O_X 0
-# define O_Y 0
+# define O_X 0.
+# define O_Y 0.
 
 # define X 1
 # define Y 2

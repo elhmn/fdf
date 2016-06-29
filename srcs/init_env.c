@@ -73,8 +73,8 @@ void			aux_width(int *width, t_fdf *fdf, int a)
 		}
 		*width = MAX_WIDTH;
 	}
-	else
-		*width += (INC_W * 2);
+//	else
+//		*width += (INC_W * 2);
 }
 
 void			init_mlx(t_fdf *fdf)
@@ -84,8 +84,9 @@ void			init_mlx(t_fdf *fdf)
 	int		a;
 
 	a = 0;
-	heigh = distance(fdf->dwn, fdf->up);
-	width = distance(fdf->rgt, fdf->lft);
+	heigh = MAX_HEIGH;//distance(fdf->dwn, fdf->up);
+	width = MAX_WIDTH;//distance(fdf->rgt, fdf->lft);
+	aux_width(&width, fdf, a);
 	if (heigh > (MAX_HEIGH - INC_H * 2))
 	{
 		a = (int)((int)heigh / (int)(OBJ_H));
@@ -93,9 +94,8 @@ void			init_mlx(t_fdf *fdf)
 		update_tab(fdf);
 		heigh = MAX_HEIGH;
 	}
-	else
-		heigh += (INC_H * 2);
-	aux_width(&width, fdf, a);
+//	else
+//		heigh += (INC_H * 2);
 	init_aux(fdf, heigh, width);
 }
 

@@ -19,8 +19,8 @@ void			set_base(t_fdf *fdf, t_base *base, int o_x, int o_y)
 	base->i.pos.x = o_x + UNIT;
 	base->i.pos.y = o_y;
 	base->j.pos.x = o_x;
-	base->j.pos.y = o_y - UNIT / 2;
-	base->k.pos.x = o_x + 10;
+	base->j.pos.y = o_y + UNIT / 2;
+	base->k.pos.x = o_x + UNIT - UNIT / 4;
 	base->k.pos.y = o_y + UNIT - UNIT / 4;
 	fdf->i = 0;
 	fdf->j = 0;
